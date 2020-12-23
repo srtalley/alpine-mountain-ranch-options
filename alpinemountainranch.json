@@ -1,0 +1,24 @@
+{
+    "main_settings": {
+        "name": "Alpine Mountain Ranch Options",
+        "text_domain": "alpinemountainranch",
+        "tabs": "true",
+        "options_suffix": "_options",
+        "page_suffix": "_page",
+        "author": "Dusty Sun",
+        "author_uri": "https://dustysun.com",
+        "item_uri": "https://thealpinemountainranch.com",
+        "support_uri": "https://dustysun.com/wordpress-plugin-theme-support/",
+        "support_email": "support@dustysun.com",
+        "page_slug": "alpinemountainranch",
+        "page_hook": "toplevel_page_alpinemountainranch",
+        "version": "0.1",
+        "wpla_update_url": "https://dustysun.com"
+    },
+    "about_sections": {
+        "alpinemountainranch_options_about": {
+            "title": "About This Plugin",
+            "tab_label": "About"
+        }
+    }
+}
