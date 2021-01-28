@@ -191,9 +191,7 @@ class AMR_EventsManager {
      * Add the headers and footers to the emails
      */
     public function amr_add_email_header_footer($mail, $EM_Object) {
-    // wl($mail);
-    // wl('-------');
-    // wl($EM_Object);
+
         if( $mail->ContentType === 'text/plain' || !is_object($EM_Object) ) {
 			return $mail;
         }
@@ -215,7 +213,6 @@ class AMR_EventsManager {
             $mail->Body = str_replace('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br>', '', $mail->Body);
             $mail->Body = str_replace('<html><body>', '', $mail->Body);
             $mail->Body = str_replace( '</body></html><p style="clear:both;">&nbsp;</p>', '', $mail->Body);
-
 
             $wpautop_body = html_entity_decode( wp_kses_allowed( wpautop( $mail->Body ) ) );
             $mail->Body = $mail_header . $wpautop_body . $mail_footer;
