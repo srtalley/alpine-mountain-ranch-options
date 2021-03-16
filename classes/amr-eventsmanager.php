@@ -114,7 +114,7 @@ class AMR_EventsManager {
      */
     public function get_amr_header($type = 'regular') {
 
-        if($type = 'followup') {
+        if($type == 'followup') {
             $header_img = 'https://alpinemountainranchsteamboat.com/wp-content/uploads/2021/01/amr_email_header_followup_winter.jpg';
         } else {
             $header_img = 'https://alpinemountainranchsteamboat.com/wp-content/uploads/2021/01/amr_email_header_main_winter.jpg';
@@ -149,7 +149,7 @@ class AMR_EventsManager {
             return $mail;
         } else {
 
-            if(strpos($mail->Subject, 'Thank you for attending')) {
+            if(strpos($mail->Subject, 'Thank you for attending') !== false) {
                 $mail_header = $this->get_amr_header('followup');
             } else {
                 $mail_header = $this->get_amr_header();

@@ -4,7 +4,7 @@ Plugin Name: Alpine Mountain Ranch Options
 Description: Modifications specific to AMR
 Author: Dusty Sun
 Author URI: https://dustysun.com
-Version: 1.1
+Version: 1.2
 Text Domain: alpinemountainranch
 License: GPLv2
 */
@@ -22,6 +22,7 @@ require_once( dirname( __FILE__ ) . '/lib/dustysun-wp-settings-api/ds_wp_setting
 
 require_once( dirname( __FILE__ ) . '/classes/amr-eventsmanager.php');
 
+require_once( dirname( __FILE__ ) . '/classes/amr-lightbox.php');
 
 
 class AMR_Options {
@@ -35,6 +36,7 @@ class AMR_Options {
 
 
     add_action( 'wp_enqueue_scripts', array( $this, 'amr_register_styles_scripts' ), 1000 );
+    
     // add_filter('get_alpinemountainranch_main_settings', array($this, 'get_alpinemountainranch_main_settings'));
     // add_filter('get_alpinemountainranch_current_settings', array($this, 'get_alpinemountainranch_current_settings'));
 
@@ -81,12 +83,16 @@ class AMR_Options {
     
     }
     $plugin_data = get_plugin_data( __FILE__ );
-    wp_enqueue_script('amr-lookup', plugins_url('js/alpinemountainranch-lookup.js', __FILE__), array('jquery'), $plugin_data['Version'], true);
+    wp_enqueue_style( 'amr-main', plugins_url('css/main.css', __FILE__), array(), '1.7.12');
+
+    wp_enqueue_script('amr-main', plugins_url('js/main.js', __FILE__), array('jquery'), $plugin_data['Version'], true);
+
+    // wp_enqueue_script('amr-lookup', plugins_url('js/alpinemountainranch-lookup.js', __FILE__), array('jquery'), $plugin_data['Version'], true);
   
-    wp_localize_script( 'amr-lookup', 'amr_lookup', array(
-      'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-      'ajaxnonce' => wp_create_nonce( 'amr_lookup' )
-    ) );
+    // wp_localize_script( 'amr-lookup', 'amr_lookup', array(
+    //   'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+    //   'ajaxnonce' => wp_create_nonce( 'amr_lookup' )
+    // ) );
 
   }
     // Logging function 

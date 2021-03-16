@@ -1,0 +1,7 @@
+.amr-video-lightbox .mfp-content {
+    width: 100% !important;
+    max-width: 150vh !important;
+}
+.amr-video-lightbox .mfp-iframe-holder .mfp-close, .amr-video-lightbox .mfp-image-holder .mfp-close {
+    top: -40px !important;
+}
