@@ -1,16 +1,30 @@
-//version: 1.1.7
+//version: 1.1.8
 
 jQuery(function($) {
     $(document).ready(function(){
+
+        // Check for the AMR fixed header
+        var amr_fixed_header = $('.amr-fixed-header');
+
+        if(amr_fixed_header.length) {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 50) { 
+                    $('body').addClass('shrink-fixed-header');
+                }
+                else{
+                    $('body').removeClass('shrink-fixed-header');
+                }
+            });
+        }
 
         $('.video-lightbox .et_pb_video_overlay').unbind('click');
         var etVideos = $('.video-lightbox .et_pb_video_overlay');
         
         $.each(etVideos, function() {
-            var videoFrames = etVideos.parent().find('.et_pb_video_box iframe'),
+            var videoFrames = $(this).parent().find('.et_pb_video_box iframe');
             videoPaths = videoFrames.attr('src').replace('/embed/', '/watch?v=');
             videoPaths = videoPaths.replace('?feature=oembed', '');
-            etVideos.magnificPopup({
+            $(this).magnificPopup({
                 items: {
                     src: videoPaths,
                 },

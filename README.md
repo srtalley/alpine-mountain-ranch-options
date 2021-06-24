@@ -1,6 +1,15 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.3.2 - 2021-06-23
+* Fixes to the email template header that checks to see if someone had attended and shows the proper header based on the email subject.
+
+#### v1.3.1 - 2021-06-10
+* Updates to the summer activities template.
+
+#### v1.3 - 2021-04-12
+* Added code to shrink the amr-fixed-header on scroll.
+
 #### v1.2 - 2021-03-15
 * Added a video lightbox code for YouTube videos in Divi when using the class "video-lightbox".
 
