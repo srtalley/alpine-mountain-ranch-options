@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.3.3 - 2021-11-05
+* Added "mp4-video-lightbox" as a class type that can open an MP4 video in a lightbox as long as there is ap oster frame. 
+
 #### v1.3.2 - 2021-06-23
 * Fixes to the email template header that checks to see if someone had attended and shows the proper header based on the email subject.
 
