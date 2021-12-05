@@ -5,3 +5,604 @@
 .amr-video-lightbox .mfp-iframe-holder .mfp-close, .amr-video-lightbox .mfp-image-holder .mfp-close {
     top: -40px !important;
 }
+
+/* Booking System */
+#page-container .DOPBSPCalendar-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#page-container .DOPBSPCalendar-wrapper .DOPBSPCalendar-container {
+    flex: 1 1 40%;
+}
+#page-container .DOPBSPCalendar-wrapper .DOPBSPCalendar-sidebar {
+    flex: 1 1 40%;
+    padding-top: 0;
+    margin-bottom: 0 !important;
+    overflow: visible !important;
+}
+#page-container .DOPBSPCalendar-wrapper .DOPBSPCalendar-sidebar form {
+    margin-left: 20px;
+    box-shadow: 1px 1px 4px 2px rgba(0,0,0, 0.2);
+}
+#page-container .DOPBSPCalendar-day.dopbsp-available .dopbsp-head, #page-container .DOPBSPCalendar-day .dopbsp-head .dopbsp-co.dopbsp-available, #page-container .DOPBSPCalendar-day .dopbsp-head .dopbsp-ci.dopbsp-available, #page-container .DOPBSPCalendar-day .dopbsp-bind-left.dopbsp-extended.dopbsp-available .dopbsp-head {
+    background-color: #25528c !important;
+    border-color: #25528c !important;
+}
+#page-container .DOPBSPCalendar-day.dopbsp-available .dopbsp-body, #page-container .DOPBSPCalendar-day .dopbsp-body .dopbsp-co.dopbsp-available, #page-container .DOPBSPCalendar-day .dopbsp-body .dopbsp-ci.dopbsp-available, #page-container .DOPBSPCalendar-day .dopbsp-bind-left.dopbsp-extended.dopbsp-available .dopbsp-body {
+    border-color: #25528c !important;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-input-wrapper input[type=submit], #page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-input-wrapper input[type=button], #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-input-wrapper input[type=submit], #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-input-wrapper input[type=button] {
+    background: #b56231;
+    font-weight: 600;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module, #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module {
+    background: #fff !important;
+    border: none !important;
+}
+#page-container #DOPBSPCalendar-extras1 h4 {
+    display: none !important;
+}
+#page-container .DOPBSPCalendar-day .dopbsp-bind-middle .dopbsp-body .dopbsp-available {
+    font-size: 13px !important;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-input-wrapper label, #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-input-wrapper label {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    padding-bottom: 5px !important;
+    font-weight: 400 !important;
+    font-style: normal;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-message, #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-message {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+}
+#page-container .DOPBSPCalendar-sidebar .DOPSelect.dopselect-single ul, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect.dopselect-single ul {
+    padding: 0 !important;
+}
+#page-container .DOPBSPCalendar-sidebar .DOPSelect, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect {
+    width: 100% !important;
+    position: relative !important;
+}
+
+#page-container .DOPBSPCalendar-sidebar .DOPSelect .dopselect-select .dopselect-selection, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect .dopselect-select .dopselect-selection {
+    width: calc(100% - 28px)!important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+#page-container .DOPBSPCalendar-sidebar .DOPSelect.dopselect-single ul, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect.dopselect-single ul {
+    width: 100% !important;
+}
+#page-container .DOPBSPCalendar-sidebar .DOPSelect.dopselect-single ul li, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect.dopselect-single ul li {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: 400 !important;
+    word-break: normal !important;
+    height: auto !important;
+    border-bottom: 1px solid #b8b8b8 !important;
+    min-height: 30px !important;
+    padding: 3px 10px !important;
+    width: 100% !important;
+}
+#page-container .DOPBSPCalendar-sidebar .DOPSelect.dopselect-single ul li:hover, #page-container .DOPBSPCalendar-sidebar .DOPSelect.dopselect-single ul li.dopselect-selected, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect.dopselect-single ul li:hover, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect.dopselect-single ul li.dopselect-selected {
+    background-color: #b56231 !important;
+}
+#page-container .DOPBSPCalendar-sidebar .DOPSelect.dopselect-single ul li:last-child, #page-container .DOPBSPCalendar-outer-sidebar .DOPSelect.dopselect-single ul li:last-child {
+    border-bottom: none !important;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-input-wrapper input[type=text], #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-input-wrapper input[type=text] {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart td, #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart td,
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart td.dopbsp-value .dopbsp-info-rule, #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart td.dopbsp-value .dopbsp-info-rule,
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart td.dopbsp-value .dopbsp-info-price, #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart td.dopbsp-value .dopbsp-info-price {
+    font-size: 16px !important;
+    line-height: 20px !important;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart .dopbsp-total td.dopbsp-value, #page-container .DOPBSPCalendar-outer-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart .dopbsp-total td.dopbsp-value {
+    font-size: 20px !important;
+}
+#page-container .DOPBSPCalendar-sidebar .dopbsp-module .dopbsp-cart-wrapper .dopbsp-cart td.dopbsp-value {
+    font-weight: 400 !important;
+}
+#page-container div[id^="DOPBSPCalendar-order"] > h4 {
+    display: none !important;
+}
+#page-container .dopbsp-column1 > .dopbsp-sidebar-content,
+#page-container .dopbsp-column1 > .dopbsp-sidebar-content > tbody,
+#page-container .dopbsp-column1 > .dopbsp-sidebar-content > tbody > tr {
+    display: flex !important;
+    flex-direction: column !important;
+}
+#page-container .dopbsp-column1 > .dopbsp-sidebar-content > tbody > tr > td {
+    flex: 1 1 100% !important;
+}
+
+/***** OWNER PORTAL *********/
+.owners-portal-hero {
+    z-index: 999;
+}
+.owners-portal-menu .et-menu > .menu-item > a {
+    padding: 15px 25px !important;
+    margin: 0 10px 20px !important;
+    background-color: rgba(0,0,0, 0.10);
+    border: 1px solid #fff;
+    transition: all 0.4s ease-in-out;
+    display: block;
+} 
+.owners-portal-menu .et-menu > .menu-item.current_page_item > a {
+    background-color: #b56231;
+    border-color: #b56231;
+}
+.owners-portal-menu .menu-item a {
+    /* padding-bottom: 0 !important; */
+}
+.owners-portal-menu .et-menu > .menu-item:hover > a {
+    background-color: #b56231;
+    border-color: #b56231;
+}
+.owners-portal-menu .et-menu .menu-item-has-children>a:first-child:after {
+    top: 15px;
+    right: 5px;
+}
+.owners-portal-menu nav .et-menu li ul.sub-menu {
+    width: 340px;
+    box-shadow: 1px 1px 1px black;
+    background-color: #7a2f03 !important;
+}
+.owners-portal-menu .et-menu .sub-menu li a {
+    /* color: #000 !important; */
+    font-weight: 600;
+    width: 300px;
+}
+.owners-portal-menu .et-menu .sub-menu li a:hover {
+    opacity: 1;
+    background-color: #552001 !important;
+}
+.calendar-icon-row .et_pb_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.calendar-icon-row .calendar-icon-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* Button Fixes */
+body #page-container .et_pb_button.et_pb_bg_layout_light.owners-portal-button:after {
+    content: attr(data-icon);
+    font-family: 'FontAwesome' !important;
+    content: attr(data-icon);
+    font-weight: 400 !important;
+    line-height: inherit;
+    font-size: inherit !important;
+    margin-left: 0.3em;
+    left: auto;
+    opacity: 1;
+    display: inline-block;
+    font-size: 1.6em;
+}
+/* Contact Form 7 */
+/* Loader */
+.wpcf7 form .ajax-loader {
+    background: url('data:image/svg+xml;utf8,<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="16px" height="16px" viewBox="0 0 128 128" xml:space="preserve"><rect x="0" y="0" width="100%" height="100%" fill="%23FFFFFF" fill-opacity="0" /><g><circle cx="16" cy="64" r="16" fill="%23EBEBEB" fill-opacity="1"/><circle cx="16" cy="64" r="16" fill="%23DDDDDD" fill-opacity="0.67" transform="rotate(45,64,64)"/><circle cx="16" cy="64" r="16" fill="%23999999" fill-opacity="0.42" transform="rotate(90,64,64)"/><circle cx="16" cy="64" r="16" fill="%23cccccc" fill-opacity="0.2" transform="rotate(135,64,64)"/><circle cx="16" cy="64" r="16" fill="%23e1e1e1" fill-opacity="0.12" transform="rotate(180,64,64)"/><circle cx="16" cy="64" r="16" fill="%23e1e1e1" fill-opacity="0.12" transform="rotate(225,64,64)"/><circle cx="16" cy="64" r="16" fill="%23e1e1e1" fill-opacity="0.12" transform="rotate(270,64,64)"/><circle cx="16" cy="64" r="16" fill="%23e1e1e1" fill-opacity="0.12" transform="rotate(315,64,64)"/><animateTransform attributeName="transform" type="rotate" values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64" calcMode="discrete" dur="720ms" repeatCount="indefinite"></animateTransform></g></svg>');
+}
+/* Submit button */
+input.wpcf7-form-control.wpcf7-submit {
+    padding: 10px 25px;
+    display: inline-block;
+    color: #ffffff!important;
+    border: 2px solid #25528c!important;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif!important;
+    font-weight: 700!important;
+    background-color: #25528c !important;
+    background: #25528c !important;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    text-transform: uppercase;
+}
+.wpcf7-submit:hover {
+    background-image: initial!important;
+    background-color: #1c3c77!important;
+    border-color: #1c3c77 !important;
+}
+/* input box styling - includes strong testimonials */
+.wpcf7-form .wpcf7-date, .wpcf7-form .wpcf7-text, .wpcf7-form .wpcf7-number, .wpcf7-form .wpcf7-textarea, .wpcf7-form .wpcf7-captchar, .wpcf7 .wpcf7-form select {
+    font-family: inherit;
+    border: 2px solid #eee !important;
+    width: 100%;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+    font-size: 16px;
+    color: #2b2b2b !important;
+    padding: 16px !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+.wpcf7-form .wpcf7-date {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+}
+.wpcf7-form .wpcf7-date:focus,
+.wpcf7-form .wpcf7-text:focus,
+.wpcf7-form .wpcf7-number:focus
+.wpcf7-form .wpcf7-textarea:focus,
+.wpcf7-form .wpcf7-captchar:focus,
+.wpcf7-form .wpcf7-select,
+.strong-form input[type="text"]:focus, .strong-form input[type="email"]:focus, .strong-form textarea:focus {
+    border: 2px solid #f6a740 !important;
+}
+/* Select styling */
+.wpcf7-form span.ds-wpcf7-select.wpcf7-form-control-wrap {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: 2px solid #eee;
+    width: 100%;
+    border-radius: 0;
+    /*overflow: hidden;*/
+    background-color: #fff;
+    background: #fff;
+    position: relative;
+    color: #2b2b2b;
+}
+.wpcf7-form span.ds-wpcf7-select.wpcf7-form-control-wrap:hover {
+    border-color: #000;
+}
+.wpcf7-form span.ds-wpcf7-select.wpcf7-form-control-wrap:after {
+    top: 50%;
+    right: 10px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(0, 0, 0, 0);
+    border-top-color: #000000;
+    border-width: 5px;
+    margin-top: -2px;
+    z-index: 100;
+}
+.wpcf7-form span.ds-wpcf7-select.wpcf7-form-control-wrap select {
+    color: #2b2b2b;
+    font-size: 16px;
+    padding: 16px;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.wpcf7-form span.ds-wpcf7-select.wpcf7-form-control-wrap select::-ms-expand{
+      display: none;
+}
+.wpcf7-form span.ds-wpcf7-select.wpcf7-form-control-wrap select:focus {
+    outline: none;
+}
+.wpcf7-form span.ds-wpcf7-select.wpcf7-form-control-wrap select:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 #000;
+}
+/* Not valid tips */
+.wpcf7-form span.wpcf7-not-valid-tip {
+    /* position: absolute; */
+    /* top: 26px; */
+    padding: 0 16px;
+    white-space: nowrap;
+    background-color: #ce0000;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+}
+.wpcf7-form span.wpcf7-form-control-wrap.ds-wpcf7-select span.wpcf7-not-valid-tip {
+    top: auto;
+    bottom:-12px;
+    left:-2px;
+}
+div.wpcf7-response-output {
+      margin-top: 15px;
+}
+.contact-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+}
+.contact-flex .contact-half {
+    flex: 1 1 48%;
+    padding: 0 8px 1em;
+}
+.contact-flex .contact-third {
+    flex: 1 1 30%;
+    padding: 0 8px 1em;
+}
+.contact-flex .contact-full {
+    flex: 1 1 100%;
+    padding: 0 8px 1em;
+}
+.contact-flex label {
+    font-weight: 600;
+}
+.contact-required {
+    color: #ff0000;
+}
+/** WooCommerce General **/
+.woocommerce #respond input#submit.alt.disabled, .woocommerce #respond input#submit.alt.disabled:hover, .woocommerce #respond input#submit.alt:disabled, .woocommerce #respond input#submit.alt:disabled:hover, .woocommerce #respond input#submit.alt:disabled[disabled], .woocommerce #respond input#submit.alt:disabled[disabled]:hover, .woocommerce a.button.alt.disabled, .woocommerce a.button.alt.disabled:hover, .woocommerce a.button.alt:disabled, .woocommerce a.button.alt:disabled:hover, .woocommerce a.button.alt:disabled[disabled], .woocommerce a.button.alt:disabled[disabled]:hover, .woocommerce button.button.alt.disabled, .woocommerce button.button.alt.disabled:hover, .woocommerce button.button.alt:disabled, .woocommerce button.button.alt:disabled:hover, .woocommerce button.button.alt:disabled[disabled], .woocommerce button.button.alt:disabled[disabled]:hover, .woocommerce input.button.alt.disabled, .woocommerce input.button.alt.disabled:hover, .woocommerce input.button.alt:disabled, .woocommerce input.button.alt:disabled:hover, .woocommerce input.button.alt:disabled[disabled], .woocommerce input.button.alt:disabled[disabled]:hover {
+    background-color: #b56231;
+    color: #fff;
+}
+.woocommerce-message {
+    /* font-weight: 400; */
+}
+.woocommerce-message a {
+    color: #fff;
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    padding: 5px 20px;
+}
+.woocommerce-message a:hover {
+    background-color: #fff;
+    color: #b56231;
+}
+/** WooCommerce Checkout **/
+.woocommerce-checkout-review-order-table span.product-name-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.woocommerce-checkout-review-order-table .product_name {
+    font-weight: 600;
+    font-size: 20px;
+}
+.woocommerce-checkout-review-order-table .product-quantity, 
+.woocommerce-checkout-review-order-table .variation-Providers,
+.woocommerce-checkout-review-order-table .variation-Duration,
+.woocommerce-checkout-review-order-table .variation-Date {
+    display: none !important;
+}
+.checkout-details-header {
+    margin: 30px 0 0;
+    font-weight: 600;
+    font-size: 20px;
+}
+/** WooCommerce Checkout **/
+.woocommerce-table--order-details .product-quantity,
+.woocommerce-table--order-details th.woocommerce-table__product-table.product-total,
+.woocommerce-table--order-details th.woocommerce-table__product-name.product-name{
+    display: none;
+}
+/** Appointable Booking **/
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .ui-datepicker-title *,
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after *{
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    color: #070707;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .ui-datepicker-title * {
+    font-size: 30px;
+    font-weight: 600;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form {
+    padding: 0;
+    border: none;
+}
+.product-type-appointment .price {
+    display: none;
+}
+.wc-appointments-date-picker .ui-datepicker td {
+    border: 1px solid #eaeaea !important;
+    /* padding: 3px !important; */
+    border-collapse: separate;
+}
+.wc-appointments-date-picker td:not(.past_day).appointable .ui-state-default{
+    background-color: #3e7a03;
+    border: 5px solid rgba(0, 0, 0, 0);
+}
+.wc-appointments-date-picker td.fully_scheduled.ui-state-disabled,
+.wc-appointments-date-picker td:not(.past_day).not_appointable {
+    opacity: 1;
+}
+.wc-appointments-date-picker td.fully_scheduled.ui-state-disabled .ui-state-default,
+.wc-appointments-date-picker td:not(.past_day).not_appointable .ui-state-default{
+    background-color: #ab0606;
+    opacity: 1;
+    border: 5px solid rgba(0, 0, 0, 0);
+
+}
+.wc-appointments-date-picker td:not(.past_day).appointable .ui-state-default,
+.wc-appointments-date-picker td.fully_scheduled .ui-state-default,
+.wc-appointments-date-picker td:not(.past_day).not_appointable .ui-state-default {
+    color: #fff;
+    text-decoration: none !important;
+}
+.wc-appointments-date-picker td:not(.past_day).appointable .ui-state-default:after {
+    content: '';
+    display: block;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='check' class='svg-inline--fa fa-check fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ffffff' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 15px;
+    margin: 5px auto 0;
+    height: 15px;
+    padding: 0 4px;
+}
+.wc-appointments-date-picker .ui-datepicker td.fully_scheduled span:before {
+    display: none;
+}
+.wc-appointments-date-picker td.fully_scheduled .ui-state-default:after,
+.wc-appointments-date-picker td:not(.past_day).not_appointable .ui-state-default:after {
+    content: '';
+    display: block;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='times' class='svg-inline--fa fa-times fa-w-11' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 352 512'%3E%3Cpath fill='%23ffffff' d='M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z'%3E%3C/path%3E%3C/svg%3E");
+    /* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='times-circle' class='svg-inline--fa fa-times-circle fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23eaeaea' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z'%3E%3C/path%3E%3C/svg%3E"); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 15px;
+    margin: 5px auto 0;
+    height: 15px;
+    padding: 0 4px;
+}
+.wc-appointments-appointment-cost {
+    display: none !important;
+}
+.product-type-appointment .product_meta {
+    display: none;
+}
+.wc-appointments-date-picker td:not(.past_day).appointable .ui-state-default:hover {
+    color: #fff;
+    background-color: #254901;
+}
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day {
+    /* background-color:rgba(0,0,0, 0.80) */
+}
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.appointable .ui-state-default,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.appointable .ui-state-default:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+    font-weight: 800 !important;
+    border: 5px solid #000;
+    box-sizing: border-box;
+}
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.appointable .ui-state-default:after,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default:after,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.appointable .ui-state-default:hover:after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='check-circle' class='svg-inline--fa fa-check-circle fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%233e7a03' d='M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z'%3E%3C/path%3E%3C/svg%3E");
+
+}
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.fully_scheduled .ui-state-default,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.fully_scheduled .ui-state-default,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.fully_scheduled .ui-state-default:hover,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.not_appointable .ui-state-default,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.not_appointable .ui-state-default,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.not_appointable .ui-state-default:hover {
+    background-color: #e6e6e6 !important;
+    color: #000 !important;
+    font-weight: 800 !important;
+    border: 5px solid #a70000;
+    box-sizing: border-box;
+}
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.fully_scheduled .ui-state-default:after,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.fully_scheduled .ui-state-default:after,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.fully_scheduled .ui-state-default:hover:after,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.not_appointable .ui-state-default:after,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.not_appointable .ui-state-default:after,
+.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.not_appointable .ui-state-default:hover:after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='times-circle' class='svg-inline--fa fa-times-circle fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ab0606' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm101.8-262.2L295.6 256l62.2 62.2c4.7 4.7 4.7 12.3 0 17l-22.6 22.6c-4.7 4.7-12.3 4.7-17 0L256 295.6l-62.2 62.2c-4.7 4.7-12.3 4.7-17 0l-22.6-22.6c-4.7-4.7-4.7-12.3 0-17l62.2-62.2-62.2-62.2c-4.7-4.7-4.7-12.3 0-17l22.6-22.6c4.7-4.7 12.3-4.7 17 0l62.2 62.2 62.2-62.2c4.7-4.7 12.3-4.7 17 0l22.6 22.6c4.7 4.7 4.7 12.3 0 17z'%3E%3C/path%3E%3C/svg%3E");
+
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form-button.single_add_to_cart_button.button {
+    color: #fff !important;
+    border-radius: 3px !important;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form-button.single_add_to_cart_button.button:hover {
+    color: #fff !important;
+}
+/* Custom AMR Appointment Fields */
+.wc-appt-checkin-checkout-dates {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 22px;
+    background-color: #161616;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+.wc-appt-checkin-checkout-dates * {
+    color: #fff !important;
+
+}
+.wc-appt-checkin-checkout-dates > div {
+    flex: 1 1 50%;
+}
+.wc-appt-checkin-checkout-dates .checkin-label,
+.wc-appt-checkin-checkout-dates .checkout-label {
+    font-weight: 600;
+}
+.wc-appt-error {
+    display: none;
+    background-color: #fdb8b8;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+.wc-appt-error span, 
+.wc-appt-error span strong {
+    color: #950000 !important;
+    font-size: 22px;
+}
+/** Addon fields **/
+.amr-start-addon-fields {
+    display: flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after .amr-start-addon-fields .wc-pao-addon {
+    flex: 1 1 40%;
+    margin: 0 !important;
+    border-top: none;
+    padding: 0 10px;
+}
+
+/* field styling */
+.wc-pao-addon-custom-text {
+    font-family: inherit;
+    border: 2px solid #868686 !important;
+    width: 100%;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+    font-size: 16px;
+    color: #070707 !important;
+    padding: 16px !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    height: 48px;
+}
+.wc-pao-addon-select {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: 2px solid #868686;
+    width: 100%;
+    border-radius: 0;
+    background-color: #fff;
+    background: #fff;
+    position: relative;
+    color: #070707;
+    height: 48px;
+    padding: 2px 10px;
+    font-size: 16px;
+}
+
+@media (max-width: 767px) {
+    .contact-flex .contact-half,
+    .contact-flex .contact-third {
+        flex-basis: 100%;
+    }
+    #page-container .DOPBSPCalendar-wrapper .DOPBSPCalendar-container,
+    #page-container .DOPBSPCalendar-wrapper .DOPBSPCalendar-sidebar {
+        flex: 1 1 100%;
+    }
+    #page-container .DOPBSPCalendar-wrapper .DOPBSPCalendar-sidebar form {
+        margin-left: 0;
+    }
+}

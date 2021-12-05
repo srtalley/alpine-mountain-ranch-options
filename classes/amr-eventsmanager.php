@@ -11,9 +11,14 @@ class AMR_EventsManager {
         add_filter('em_email_users_hook', array($this, 'amr_add_email_header_footer'), 999999999990, 2);
 
         add_filter('stonehenge_mailer_before_send', array($this, 'amr_add_email_header_footer'), 10, 2);
+
+        // add_filter('widget_title', array($this, 'change_title'));
     }
 
-
+    // public function change_title($title) {
+    //     wl($title);
+    //     return $title;
+    // }
     /**
      * Send additional fields to Mailchimp on signup
      * https://github.com/ibericode/mc4wp-snippets/blob/master/integrations/integration-slugs.md

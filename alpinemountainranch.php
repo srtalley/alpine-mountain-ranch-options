@@ -4,7 +4,7 @@ Plugin Name: Alpine Mountain Ranch Options
 Description: Modifications specific to AMR
 Author: Dusty Sun
 Author URI: https://dustysun.com
-Version: 1.3.3
+Version: 1.3.5
 Text Domain: alpinemountainranch
 License: GPLv2
 */
@@ -19,10 +19,13 @@ define( 'AMR__FILE__', __FILE__ );
 require_once( dirname( __FILE__ ) . '/alpinemountainranch-admin.php');
 
 require_once( dirname( __FILE__ ) . '/lib/dustysun-wp-settings-api/ds_wp_settings_api.php');
+require_once( dirname( __FILE__ ) . '/classes/amr-woocommerce-appointments.php');
 
 require_once( dirname( __FILE__ ) . '/classes/amr-eventsmanager.php');
 
-require_once( dirname( __FILE__ ) . '/classes/amr-lightbox.php');
+// require_once( dirname( __FILE__ ) . '/classes/amr-pinpoint-booking.php');
+
+// require_once( dirname( __FILE__ ) . '/classes/amr-lightbox.php');
 
 
 class AMR_Options {
@@ -33,6 +36,8 @@ class AMR_Options {
   public $amrmain_settings;
 
   public function __construct() {
+    // Template Path
+    define( 'AMR_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
 
 
     add_action( 'wp_enqueue_scripts', array( $this, 'amr_register_styles_scripts' ), 1000 );
@@ -83,9 +88,12 @@ class AMR_Options {
     
     }
     $plugin_data = get_plugin_data( __FILE__ );
-    wp_enqueue_style( 'amr-main', plugins_url('css/main.css', __FILE__), array(), '1.7.12');
+    wp_enqueue_style( 'amr-main', plugins_url('css/main.css', __FILE__), array(), $plugin_data['Version']);
 
     wp_enqueue_script('amr-main', plugins_url('js/main.js', __FILE__), array('jquery'), $plugin_data['Version'], true);
+
+    wp_enqueue_script('amr-woocommerce-appointments', plugins_url('js/amr-woocommerce-appointments.js', __FILE__), array('jquery'), $plugin_data['Version'], true);
+
 
     // wp_enqueue_script('amr-lookup', plugins_url('js/alpinemountainranch-lookup.js', __FILE__), array('jquery'), $plugin_data['Version'], true);
   
