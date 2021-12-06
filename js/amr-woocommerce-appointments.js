@@ -2,7 +2,6 @@
 
 jQuery(function($) {
     $(document).ready(function(){
-        console.log('fac');
         setupFormEvents();
       
     
@@ -17,7 +16,7 @@ jQuery(function($) {
         // get changed durations
         form.on( 'addon-duration-changed', function(event ,duration) {
             var currentForm = $(this);
-            var picker = currentForm.find('.picker');
+            // var picker = currentForm.find('.picker');
 
             // var appointment_duration = parseInt( form.find('.picker').attr( 'data-appointment_duration' ), 10 );
             var addon_duration = parseInt( duration, 10 );
@@ -50,41 +49,87 @@ jQuery(function($) {
 
             var currentForm = $(this);
             var picker = currentForm.find('.picker');
-
-            // reset the added days when changing a date
-            picker.data( 'combined_duration', 1 );
-            picker.data( 'addon_duration', 0 );
-
-            
-            var combined_duration = picker.data( 'combined_duration' ) ? picker.data( 'combined_duration' ) : 1;
             var stringDate = data;
             var date = stringDate.split("-"); 
-        
             selectedDate = new Date(date[0],date[1]-1,date[2]);//Date object
+            if(picker.data('duration_unit') == 'day') {
+                // reset the added days when changing a date
+                picker.data( 'combined_duration', 1 );
+                picker.data( 'addon_duration', 0 );
 
-            var month = selectedDate.toLocaleString('default', { month: 'long' });
-            $(currentForm).find('.checkin-value').html(month + ' ' + date[2] + ', ' + date[0]);
+                var combined_duration = picker.data( 'combined_duration' ) ? picker.data( 'combined_duration' ) : 1;
 
+                var month = selectedDate.toLocaleString('default', { month: 'long' });
+                $(currentForm).find('.checkin-value').html(month + ' ' + date[2] + ', ' + date[0]);
 
-            if(combined_duration == 1) {
-                $(currentForm).find('.checkout-value').html(month + ' ' + date[2] + ', ' + date[0]);
-            }
+                if(combined_duration == 1) {
+                    $(currentForm).find('.checkout-value').html(month + ' ' + date[2] + ', ' + date[0]);
+                }
 
-            currentForm.find('.wc-pao-addon-select').val('');
-            // uncheck other items
-            setTimeout(function() {
-                console.log(currentForm.find('.highlighted_day:not(:first)'));
+                currentForm.find('.wc-pao-addon-select').val('');
+                // uncheck other items
+                setTimeout(function() {
 
-            currentForm.find('.highlighted_day:not(:first)').removeClass('ui-datepicker-selected-day');
-            currentForm.find('.highlighted_day:not(:first)').removeClass('highlighted_day');
+                currentForm.find('.highlighted_day:not(:first)').removeClass('ui-datepicker-selected-day');
+                currentForm.find('.highlighted_day:not(:first)').removeClass('highlighted_day');
 
-            }, 100);
+                }, 100);
+            } // end day
           
         } );
+        form.on( 'time-selected', function(event, data) {
+            var currentForm = $(this);
+            var picker = currentForm.find( '.slot-picker' );
 
+            setTimeout(function() {
+                // Get selected slot 'data-slot' value.
+                var time_value = picker.find( '.selected' ).data( 'slot' ).toString();
+                var hour = time_value.substring(0,2);
+                var minute = time_value.substring(2,2);
+
+                // use the date that was defined earlier
+                var start_date_with_hours = new Date(selectedDate);
+                start_date_with_hours.setHours(hour, minute);
+
+                var start_date_with_hours_locale = start_date_with_hours.toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true
+                });
+
+                // set the appointment length to get the end time
+                var appointment_length = 3;
+                var end_time = (parseInt(hour) + appointment_length).toString();
+
+                var end_date_with_hours = start_date_with_hours;
+                end_date_with_hours.setHours(end_time);
+                var end_date_with_hours_locale = end_date_with_hours.toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true
+                });
+
+                // $(currentForm).find('.starttime-value').html((start_date_with_hours.getMonth() + 1) + '/' + start_date_with_hours.getDate().toString() + '/' + start_date_with_hours.getFullYear().toString() + '-' + start_date_with_hours_locale);
+
+                // $(currentForm).find('.endtime-value').html((end_date_with_hours.getMonth() + 1) + '/' + end_date_with_hours.getDate().toString() + '/' + end_date_with_hours.getFullYear().toString()  + '-' +  end_date_with_hours_locale);
+
+                $(currentForm).find('.date-value').html((start_date_with_hours.getMonth() + 1) + '/' + start_date_with_hours.getDate().toString() + '/' + start_date_with_hours.getFullYear().toString());
+
+
+                $(currentForm).find('.starttime-value').html(start_date_with_hours_locale);
+
+                $(currentForm).find('.endtime-value').html(end_date_with_hours_locale);
+
+
+            }, 700);
+
+            // var picker = currentForm.find('.picker');
+            // if(picker.data('duration_unit') == 'hour') {
+            //     $(currentForm).find('.starttime-value').html('pizza');
+
+            // } // end hour
+        });
         // form.on( 'click', '.appointable', function() {
-        //     console.log("tits");
-        //     console.log(this);
         //     var currentForm = $(this);
         //     currentForm.find('.highlighted_day:not(:first)').removeClass('ui-datepicker-selected-day');
         //     currentForm.find('.highlighted_day:not(:first)').removeClass('highlighted_day');

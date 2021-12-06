@@ -28,17 +28,20 @@ class AMR_WooCommerceAppointments {
         add_action( 'woocommerce_before_calculate_totals', array($this, 'update_appointment_meta'), 10, 1);
 
 
-        add_action( 'woocommerce_after_appointment_form_output', array($this, 'add_checkin_checkout_dates'), 1, 1 );
+        add_action( 'woocommerce_after_appointment_form_output', array($this, 'add_checkin_checkout_dates'), 1, 2 );
         add_action( 'woocommerce_after_appointment_form_output', array($this, 'add_checkin_checkout_dates_end'), 100, 1 );
         // add_filter( 'woocommerce_hidden_order_itemmeta', array($this, 'hide_my_item_meta') );
 
         add_filter( 'woocommerce_order_item_permalink', array($this, 'remove_woocommerce_order_item_permalink') );
 
-        add_filter( 'wc_appointments_get_summary_list', array($this, 'modify_wc_appointments_get_summary_list'), 10, 1 );
+        // add_filter( 'wc_appointments_get_summary_list', array($this, 'modify_wc_appointments_get_summary_list'), 10, 1 );
         add_filter( 'woocommerce_order_item_get_formatted_meta_data', array($this, 'change_order_display_meta'), 10, 1 );
 
+        // add_filter( 'woocommerce_appointments_time_slots_html', array($this, 'change_woocommerce_appointments_time_slots_html'), 10, 10 );
     }
 
+    // public function change_woocommerce_appointments_time_slots_html($slots_html, $slots, $intervals, $time_to_check, $staff_id, $from, $to, $timezone, $thisme, $appointments) {
+    // }
     /**
          * Add WooCommerce template location
          */
@@ -78,25 +81,44 @@ class AMR_WooCommerceAppointments {
     
     // function hide_my_item_meta( $hidden_meta ) {
 
-    //     wl($hidden_meta);
     //     $hidden_meta[] = 'staff';
     //     return $hidden_meta;
     // }
     /**
      * add a checkin checkout display
      */
-    public function add_checkin_checkout_dates() {
-        $html = '<div class="wc-appt-checkin-checkout-dates">';
-        $html .= '<div class="wc-appt-checkin-date"><span class="checkin-label">Check In: </span> <span class="checkin-value"></span></div>';
-        $html .= '<div class="wc-appt-checkout-date"><span class="checkout-label">Check Out: </span> <span class="checkout-value"></span></div>';
-        $html .= '</div>';
-        
-        $html .= '<div class="wc-appt-error">';
-        $html .= '<span class="wc-appt-error-message"><strong>Notice:</strong> You cannot include unavailable dates in your reservation.</span>';
-        $html .= '</div>';
+    public function add_checkin_checkout_dates($position = 'after', $product_id = 0) {
 
-        $html .= '<div class="amr-start-addon-fields">';
-        echo $html;
+        if($product_id != 0) {
+            // get the product
+            $product = wc_get_product($product_id);
+            $duration_unit = $product->get_duration_unit();
+
+            $html = '';
+            if($duration_unit == 'day') {
+                $html .= '<div class="wc-appt-checkin-checkout-dates">';
+                $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">Check In: </span> <span class="checkin-value"></span></div>';
+                $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">Check Out: </span> <span class="checkout-value"></span></div>';
+                $html .= '</div>';
+            }
+            if($duration_unit == 'hour') {
+                $html .= '<div class="wc-appt-starttime-endtime">';
+                $html .= '<div class="wc-appt-date"><span class="amr-wc-appt-label date-label">Date: </span> <span class="date-value"></span></div>';
+
+                $html .= '<div class="wc-appt-starttime"><span class="amr-wc-appt-label checkin-label">Starts: </span> <span class="starttime-value"></span></div>';
+                $html .= '<div class="wc-appt-endtime"><span class="amr-wc-appt-label endtime-label">Ends: </span> <span class="endtime-value"></span></div>';
+                $html .= '</div>';
+            }
+            if($duration_unit == 'day' || $duration_unit == 'hour') {
+                $html .= '<div class="wc-appt-error">';
+                $html .= '<span class="wc-appt-error-message"><strong>Notice:</strong> You cannot include unavailable dates in your reservation.</span>';
+                $html .= '</div>';
+                $html .= '<div class="amr-start-addon-fields">';
+                echo $html;
+            }
+
+        } 
+        
     }
     public function add_checkin_checkout_dates_end() {
         echo '</div>';
@@ -252,6 +274,7 @@ class AMR_WooCommerceAppointments {
 
     /**
      * update the cart meta with the checkout date
+     * or the start / end times
      */
 
     public function update_appointment_meta() {
@@ -260,12 +283,30 @@ class AMR_WooCommerceAppointments {
         $cart = WC()->cart->cart_contents;
         foreach( $cart as $cart_item_id => $cart_item ) {
             if(isset($cart_item['appointment'])) {
-                // calculate checkout date
-                $checkin_date = \DateTime::createFromFormat('Y-m-d', $cart_item['appointment']['_date']);
-                $cart_item['amr_checkin_date'] = $checkin_date->format('F d, Y');
-                $checkout_date = $checkin_date;
-                $checkout_date = $checkout_date->modify('+' . ($cart_item['appointment']['_duration']-1) . ' day');
-                $cart_item['amr_checkout_date'] = $checkout_date->format('F d, Y');
+
+                // get the product
+                $product_id = $cart_item['product_id'];
+                $product = wc_get_product($product_id);
+                $duration_unit = $product->get_duration_unit();
+                
+                if($duration_unit == 'day') {
+                    // calculate checkout date
+                    $checkin_date = \DateTime::createFromFormat('Y-m-d', $cart_item['appointment']['_date']);
+                    $cart_item['amr_checkin_date'] = $checkin_date->format('F d, Y');
+                    $checkout_date = $checkin_date;
+                    $checkout_date = $checkout_date->modify('+' . ($cart_item['appointment']['_duration']-1) . ' day');
+                    $cart_item['amr_checkout_date'] = $checkout_date->format('F d, Y');
+                }
+                if($duration_unit == 'hour') {
+                    // calculate start time and end time
+                    $start_datetime = \DateTime::createFromFormat('Y-m-d G:i', $cart_item['appointment']['_date'] . ' ' . $cart_item['appointment']['_time']);
+                    $cart_item['amr_appt_date'] = $start_datetime->format('F d, Y');
+                    $cart_item['amr_starttime'] = $start_datetime->format('g:i A');
+
+                    $end_datetime = $start_datetime;
+                    $end_datetime = $end_datetime->modify('+' . $cart_item['appointment']['_duration'] . ' minute');
+                    $cart_item['amr_endtime'] = $end_datetime->format('g:i A');
+                }
 
             }
 
@@ -350,6 +391,9 @@ class AMR_WooCommerceAppointments {
         }
     } // end function 
 
+    /**
+     * Add the checkin/checkout time or the time in / time out
+     */
     public function checkout_time_in_cart_display( $item_data, $cart_item ) {
         $checkin_date = isset($cart_item['amr_checkin_date']) ? $cart_item['amr_checkin_date']: '';
         $checkout_date = isset($cart_item['amr_checkout_date']) ? $cart_item['amr_checkout_date']: '';
@@ -366,6 +410,29 @@ class AMR_WooCommerceAppointments {
             );
         }
         
+        $appt_date = isset($cart_item['amr_appt_date']) ? $cart_item['amr_appt_date']: '';
+        $start_datetime = isset($cart_item['amr_starttime']) ? $cart_item['amr_starttime']: '';
+        $end_datetime = isset($cart_item['amr_endtime']) ? $cart_item['amr_endtime']: '';
+
+        if ( ! empty( $appt_date ) ) {
+            $item_data[] = array(
+                'name' => __('Date', 'woocommerce'),
+                'value' => $appt_date,
+            );
+        }
+        if ( ! empty( $start_datetime ) ) {
+            $item_data[] = array(
+                'name' => __('Start Time', 'woocommerce'),
+                'value' => $start_datetime,
+            );
+        }
+        if ( ! empty( $end_datetime ) ) {
+            $item_data[] = array(
+                'name' => __('End Time', 'woocommerce'),
+                'value' => $end_datetime,
+            );
+        }
+
         return $item_data;
     }
     /**
@@ -378,10 +445,9 @@ class AMR_WooCommerceAppointments {
     /**
      * Modify the summary list
      */
-    public function modify_wc_appointments_get_summary_list($summary) {
-        // wl($summary);
-        return $summary;
-    }
+    // public function modify_wc_appointments_get_summary_list($summary) {
+    //     return $summary;
+    // }
 
     /**
      * Change the items displayed in the meta

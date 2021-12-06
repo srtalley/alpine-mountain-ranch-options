@@ -360,24 +360,39 @@ div.wpcf7-response-output {
 }
 /** WooCommerce Checkout **/
 .woocommerce-checkout-review-order-table span.product-name-left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: block;
 }
 .woocommerce-checkout-review-order-table .product_name {
     font-weight: 600;
     font-size: 20px;
+    display: block;
+    margin-bottom: 20px;
 }
 .woocommerce-checkout-review-order-table .product-quantity, 
 .woocommerce-checkout-review-order-table .variation-Providers,
 .woocommerce-checkout-review-order-table .variation-Duration,
-.woocommerce-checkout-review-order-table .variation-Date {
+.woocommerce-checkout-review-order-table .variation-Date,
+.woocommerce-checkout-review-order-table .variation-Time {
     display: none !important;
 }
 .checkout-details-header {
-    margin: 30px 0 0;
+    margin: 10px 0 0;
     font-weight: 600;
     font-size: 20px;
+    
+}
+#order_review_heading {
+    margin-top: 30px;
+}
+#left-area {
+    padding-top: 0 !important;
+}
+#order_review {
+    margin-bottom: 60px;
+}
+#order_review th.product-name, 
+#order_review th.product-total {
+    display: none;
 }
 /** WooCommerce Checkout **/
 .woocommerce-table--order-details .product-quantity,
@@ -513,8 +528,30 @@ div.wpcf7-response-output {
 .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form-button.single_add_to_cart_button.button:hover {
     color: #fff !important;
 }
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker .slot_row {
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker ul.slot_column {
+    flex: 1 1 30%;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot_heading {
+    font-size: 22px;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot a {
+    font-size: 18px;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot.selected a, .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot.selected:hover a {
+    background-color: #3e7a03;
+}
+/* Remove the evening column */
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker ul.slot_column.evening {
+    display: none;
+}
 /* Custom AMR Appointment Fields */
-.wc-appt-checkin-checkout-dates {
+.wc-appt-checkin-checkout-dates,
+.wc-appt-starttime-endtime {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -524,15 +561,20 @@ div.wpcf7-response-output {
     padding: 10px 20px;
     margin-bottom: 20px;
 }
-.wc-appt-checkin-checkout-dates * {
+.wc-appt-checkin-checkout-dates *,
+.wc-appt-starttime-endtime * {
     color: #fff !important;
-
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif !important;
 }
-.wc-appt-checkin-checkout-dates > div {
+.wc-appt-checkin-checkout-dates > div,
+.wc-appt-starttime-endtime > div {
     flex: 1 1 50%;
 }
-.wc-appt-checkin-checkout-dates .checkin-label,
-.wc-appt-checkin-checkout-dates .checkout-label {
+.wc-appt-starttime-endtime > div.wc-appt-date {
+    flex-basis: 100%;
+}
+.wc-appt-checkin-checkout-dates .amr-wc-appt-label,
+.wc-appt-starttime-endtime .amr-wc-appt-label {
     font-weight: 600;
 }
 .wc-appt-error {
@@ -551,6 +593,7 @@ div.wpcf7-response-output {
     display: flex ;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-end;
     margin: 0 -10px;
 }
 .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after .amr-start-addon-fields .wc-pao-addon {
@@ -592,7 +635,14 @@ div.wpcf7-response-output {
     padding: 2px 10px;
     font-size: 16px;
 }
-
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-pao-addon p.form-row label {
+    font-weight: 400;
+    font-size: 16px;
+    color: #070707 !important;
+}
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-pao-addon p.form-row:last-of-type {
+    margin-bottom: 0;
+}
 @media (max-width: 767px) {
     .contact-flex .contact-half,
     .contact-flex .contact-third {

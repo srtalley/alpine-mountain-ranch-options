@@ -47,19 +47,53 @@ defined( 'ABSPATH' ) || exit;
 			esc_html__( 'Duration', 'woocommerce-appointments' ),
 			esc_attr( $duration )
 		);
+
+
+
+		$duration_split = explode(' ', $duration);
+		if(substr( $duration_split[1], 0, 3 ) === 'day') {
+			$checkin_date = \DateTime::createFromFormat('F d, Y', $date);
+			$checkout_date = $checkin_date;
+			$checkout_date = $checkout_date->modify('+' . ($duration-1) . ' days');
+			printf(
+				'<li%1$s>%2$s: <strong>%3$s</strong></li>',
+				esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
+				esc_html__( 'Checkout', 'woocommerce-appointments' ),
+				esc_attr( $checkout_date->format('F d, Y') )
+			);
+
+
+
+		}
+		if(substr( $duration_split[1], 0, 4 ) === 'hour') {
+
+
+
+			// calculate start time and end time
+			$start_datetime = \DateTime::createFromFormat('F d, Y, g:i a', $date);
+			$amr_starttime = $start_datetime->format('g:i A');
+
+			$end_datetime = $start_datetime;
+			$end_datetime = $end_datetime->modify('+' . $duration);
+			$amr_endtime = $end_datetime->format('g:i A');
+
+			printf(
+				'<li%1$s>%2$s: <strong>%3$s</strong></li>',
+				esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
+				esc_html__( 'Start Time', 'woocommerce-appointments' ),
+				esc_attr( $amr_starttime )
+			);
+			printf(
+				'<li%1$s>%2$s: <strong>%3$s</strong></li>',
+				esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
+				esc_html__( 'End Time', 'woocommerce-appointments' ),
+				esc_attr( $amr_endtime )
+			);
+		}
+
+		
 	}
-	if($duration > 1) {
-		$checkin_date = \DateTime::createFromFormat('F d, Y', $date);
-		wl($checkin_date);
-		$checkout_date = $checkin_date;
-		$checkout_date = $checkout_date->modify('+' . ($duration-1) . ' days');
-		printf(
-			'<li%1$s>%2$s: <strong>%3$s</strong></li>',
-			esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
-			esc_html__( 'Checkout', 'woocommerce-appointments' ),
-			esc_attr( $checkout_date->format('F d, Y') )
-		);
-	}
+	
 	// Providers?
 	// if ( isset( $providers ) && $providers ) {
 	// 	printf(
