@@ -23,6 +23,8 @@ class AMR_WooCommerceAppointments {
        
         add_filter ( 'woocommerce_cart_item_name', array($this, 'wc_checkout_modify_order'), 10, 3 );
 
+        // add_filter ( 'woocommerce_cart_item_name', array($this, 'wc_checkout_modify_order_end'), 100, 3 );
+
         add_filter( 'woocommerce_get_item_data', array($this, 'checkout_time_in_cart_display'), 10, 2 );
 
         add_action( 'woocommerce_before_calculate_totals', array($this, 'update_appointment_meta'), 10, 1);
@@ -97,8 +99,8 @@ class AMR_WooCommerceAppointments {
             $html = '';
             if($duration_unit == 'day') {
                 $html .= '<div class="wc-appt-checkin-checkout-dates">';
-                $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">Check In: </span> <span class="checkin-value"></span></div>';
-                $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">Check Out: </span> <span class="checkout-value"></span></div>';
+                $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">Start Date: </span> <span class="checkin-value"></span></div>';
+                $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">End Date: </span> <span class="checkout-value"></span></div>';
                 $html .= '</div>';
             }
             if($duration_unit == 'hour') {
@@ -232,6 +234,9 @@ class AMR_WooCommerceAppointments {
                 // Switching these headings but they need to be slightly different
                 // or it enters a loop where it keeps trying to replace the other
                 // one over and over.
+                case 'Order number:':
+                    $translated_text = __( 'Request number', 'woocommerce' );
+                    break;
                 case 'Order details':
                     $translated_text = __( 'Request Details', 'woocommerce' );
                     break;
@@ -262,6 +267,24 @@ class AMR_WooCommerceAppointments {
                     break;
                 case 'Your appointment is awaiting confirmation. You will be notified by email as soon as we\'ve confirmed availability.':
                     $translated_text = __( 'Your request is awaiting confirmation. You will be notified by email as soon as we\'ve confirmed availability.', 'woocommerce-appointments');
+                    break;
+                case 'Scheduled Product':
+                    $translated_text = __( 'Reserved Item', 'woocommerce-appointments');
+                    break;
+                case 'Appointment Date':
+                    $translated_text = __( 'Scheduled Date', 'woocommerce-appointments');
+                    break;
+                case 'Appointment ID':
+                    $translated_text = __( 'Reservation ID', 'woocommerce-appointments');
+                    break;
+                case 'Appointment Duration':
+                    $translated_text = __( 'Duration', 'woocommerce-appointments');
+                    break;
+                case 'You can view and edit this appointment in the dashboard here: %s':
+                    $translated_text = __( 'You can view and edit this reservation in the dashboard here: %s', 'woocommerce-appointments');
+                    break;
+                case 'This appointment is awaiting your approval. Please check it and inform the customer if the date is available or not.':
+                    $translated_text = __( 'You can approve or deny the request here:', 'woocommerce-appointments');
                     break;
             }
         } 
@@ -348,16 +371,17 @@ class AMR_WooCommerceAppointments {
                         $return_value .= '</span>';
 
                         /* Step 3 : Add product name */
-                        $return_value .= '<span class="product_name" >' . $product_title . '</span></span>' ;
+                        $return_value .= '<span class="product_name" >' . $product_title . '</span>' ;
 
                         $return_value .= sprintf(
-                            '<span class="product-name-bottom"><a href="%s" class="remove-item" title="%s" data-product_id="%s" data-product_sku="%s">&times; Click to remove this request and start over</a>',
+                            '<a href="%s" class="remove-item" title="%s" data-product_id="%s" data-product_sku="%s">&times; Click to remove this request and start over</a></span>',
                             esc_url( WC()->cart->get_remove_url( $cart_key ) ),
                             __( 'Remove this item', 'woocommerce' ),
                             esc_attr( $product_id ),
                             esc_attr( $_product->get_sku() )
                         );
-                        $return_value .= '<div class="checkout-details-header">Request Details</div>';
+                        $return_value .= '<span class="product-name-bottom"><div class="checkout-details-header">Request Details</div>';
+
                         /* Step 4 : Add Price ea. */
                         // $return_value .= '<span class="price-each"><strong>Price each:</strong> ' . WC()->cart->get_product_price( $_product ) . '</span>';
                         /* Step 3 : Add quantity selector */
@@ -392,6 +416,14 @@ class AMR_WooCommerceAppointments {
     } // end function 
 
     /**
+     * Close the above html
+     */
+    public function wc_checkout_modify_order_end() {
+        if(is_checkout()) {
+            return '</span>';
+        }
+    }
+    /**
      * Add the checkin/checkout time or the time in / time out
      */
     public function checkout_time_in_cart_display( $item_data, $cart_item ) {
@@ -416,7 +448,7 @@ class AMR_WooCommerceAppointments {
 
         if ( ! empty( $appt_date ) ) {
             $item_data[] = array(
-                'name' => __('Date', 'woocommerce'),
+                'name' => __('Date Scheduled', 'woocommerce'),
                 'value' => $appt_date,
             );
         }
@@ -456,7 +488,7 @@ class AMR_WooCommerceAppointments {
         $temp_metas = [];
         foreach($formatted_meta as $key => $meta) {
             if ( isset( $meta->key ) ) {
-                if($meta->key != 'Length of Stay') {
+                if($meta->key != 'Days Reserved') {
                     $temp_metas[$key] = $meta;
                 }
             }

@@ -58,7 +58,7 @@ defined( 'ABSPATH' ) || exit;
 			printf(
 				'<li%1$s>%2$s: <strong>%3$s</strong></li>',
 				esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
-				esc_html__( 'Checkout', 'woocommerce-appointments' ),
+				esc_html__( 'End Date', 'woocommerce-appointments' ),
 				esc_attr( $checkout_date->format('F d, Y') )
 			);
 

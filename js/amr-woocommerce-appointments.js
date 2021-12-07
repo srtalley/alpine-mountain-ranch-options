@@ -75,6 +75,21 @@ jQuery(function($) {
 
                 }, 100);
             } // end day
+            if(picker.data('duration_unit') == 'hour') {
+                setTimeout(function() {
+                    console.log('bad');
+                    // see if there are blank spots
+                    var slotpicker = currentForm.find('.slot-picker');
+                    var slot_column = slotpicker.find('.slot_column');
+                    console.log(slot_column);
+                    $(slot_column).each(function() {
+                        if($(this).children().hasClass('slot_empty')){
+                            $(this).addClass('hide-slot_column');
+                        }
+
+                    });
+                },1000);
+            }
           
         } );
         form.on( 'time-selected', function(event, data) {

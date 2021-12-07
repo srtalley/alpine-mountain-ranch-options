@@ -1,6 +1,10 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.3.7 - 2021-12-06
+* Added an amr-woocommerce-appointments class to handle the bookings.
+* Updated CSS and functions to modify WooCommerce to behave like is needed.
+
 #### v1.3.3 - 2021-11-05
 * Added "mp4-video-lightbox" as a class type that can open an MP4 video in a lightbox as long as there is ap oster frame. 
 
