@@ -25,7 +25,7 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php esc_html_e( 'Your appointment has been confirmed. The details of your appointment are shown below.', 'woocommerce-appointments' ); ?></p>
+<p><?php esc_html_e( 'Your reservation has been confirmed. The details of your reservation are shown below.', 'woocommerce-appointments' ); ?></p>
 
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; margin:0 0 16px;" border="1">
 	<tbody>
@@ -84,8 +84,8 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 		<?php
 		printf(
 			/* translators: %s: checkout payment url */
-			esc_html__( 'To pay for this appointment please use the following link: %s', 'woocommerce-appointments' ),
-			'<a href="' . esc_url( $wc_order->get_checkout_payment_url() ) . '">' . esc_attr__( 'Pay for appointment', 'woocommerce-appointments' ) . '</a>'
+			esc_html__( 'To pay for this reservation please use the following link: %s', 'woocommerce-appointments' ),
+			// '<a href="' . esc_url( $wc_order->get_checkout_payment_url() ) . '">' . esc_attr__( 'Pay for appointment', 'woocommerce-appointments' ) . '</a>'
 		);
 		?>
 		</p>
@@ -95,7 +95,7 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 
 	<br />
 	<h2>
-	<?php esc_html_e( 'Order', 'woocommerce-appointments' ) . ': #' . esc_html( $wc_order->get_order_number() ); ?>
+	<?php esc_html_e( 'Reservation', 'woocommerce-appointments' ) . ': #' . esc_html( $wc_order->get_order_number() ); ?>
 	(
 	<?php
 	$order_date = $wc_order->get_date_created() ? $wc_order->get_date_created()->date( 'Y-m-d H:i:s' ) : '';
@@ -111,14 +111,14 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 		<thead>
 			<tr>
 				<th class="td" scope="col" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-					<?php esc_html_e( 'Product', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Item / Location', 'woocommerce-appointments' ); ?>
 				</th>
-				<th class="td" scope="col" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
+				<!-- <th class="td" scope="col" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 					<?php esc_html_e( 'Quantity', 'woocommerce-appointments' ); ?>
 				</th>
 				<th class="td" scope="col" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 					<?php esc_html_e( 'Price', 'woocommerce-appointments' ); ?>
-				</th>
+				</th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -140,7 +140,7 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 			}
 			?>
 		</tbody>
-		<tfoot>
+		<!-- <tfoot>
 			<?php
 			$order_totals = $wc_order->get_order_item_totals();
 			if ( $order_totals ) {
@@ -160,7 +160,7 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 				}
 			}
 			?>
-		</tfoot>
+		</tfoot> -->
 	</table>
 
 	<?php do_action( 'woocommerce_email_after_order_table', $wc_order, $sent_to_admin, $plain_text, $email ); ?>

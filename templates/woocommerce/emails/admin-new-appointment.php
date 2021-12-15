@@ -25,10 +25,10 @@ $wc_order    = $appointment->get_order();
 
 if ( wc_appointment_order_requires_confirmation( $wc_order ) && $appointment->has_status( [ 'pending-confirmation' ] ) ) {
 	/* translators: %s: billing first and last name */
-	$opening_paragraph = __( 'An appointment has been made by %s and is awaiting your approval. The details of this appointment are shown below.', 'woocommerce-appointments' );
+	$opening_paragraph = __( 'An reservation has been made by %s and is awaiting your approval. The details of this reservation are shown below.', 'woocommerce-appointments' );
 } else {
 	/* translators: %s: billing first and last name */
-	$opening_paragraph = __( 'An new appointment has been made by %s. The details of this appointment are shown below.', 'woocommerce-appointments' );
+	$opening_paragraph = __( 'An new reservation has been made by %s. The details of this reservation are shown below.', 'woocommerce-appointments' );
 }
 
 do_action( 'woocommerce_email_header', $email_heading, $email );
@@ -42,7 +42,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 	<tbody>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Scheduled Product', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Item / Location', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php echo wp_kses_post( $appointment->get_product_name() ); ?>
@@ -50,7 +50,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment ID', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation ID', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_id() ); ?>
@@ -58,7 +58,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Date', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Date', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_start_date() ); ?>
@@ -66,7 +66,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Duration', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Duration', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_duration() ); ?>
@@ -88,7 +88,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 </table>
 
 <?php if ( wc_appointment_order_requires_confirmation( $wc_order ) && $appointment->has_status( [ 'pending-confirmation' ] ) ) : ?>
-<p><?php esc_html_e( 'This appointment is awaiting your approval. Please check it and inform the customer if the date is available or not.', 'woocommerce-appointments' ); ?></p>
+<p><?php esc_html_e( 'This reservation is awaiting your approval. Please check it and inform the customer if the date is available or not.', 'woocommerce-appointments' ); ?></p>
 <?php endif; ?>
 
 <p>
@@ -96,7 +96,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 echo make_clickable(
 	sprintf(
 		/* translators: %s: a href to appointment */
-		esc_html__( 'You can view and edit this appointment in the dashboard here: %s', 'woocommerce-appointments' ),
+		esc_html__( 'You can view and edit this reservation in the dashboard here: %s', 'woocommerce-appointments' ),
 		admin_url( 'post.php?post=' . $appointment->get_id() . '&action=edit' )
 	)
 ); // WPCS: XSS ok.

@@ -1,6 +1,10 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.3.9 - 2021-12-14 
+* Fixed issues in the appointment classes.
+* Updated appointment emails. 
+
 #### v1.3.7 - 2021-12-06
 * Added an amr-woocommerce-appointments class to handle the bookings.
 * Updated CSS and functions to modify WooCommerce to behave like is needed.

@@ -26,14 +26,14 @@ $wc_order    = $appointment->get_order();
 
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php esc_html_e( 'The following appointment has been rescheduled by the customer. The details of the rescheduled appointment can be found below.', 'woocommerce-appointments' ); ?></p>
+<p><?php esc_html_e( 'The following reservation has been rescheduled by the customer. The details of the rescheduled reservation can be found below.', 'woocommerce-appointments' ); ?></p>
 
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; margin:0 0 16px;" border="1">
 	<tbody>
 		<?php if ( $appointment->get_product() ) : ?>
 			<tr>
 				<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-					<?php esc_html_e( 'Scheduled Product', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Item / Location', 'woocommerce-appointments' ); ?>
 				</th>
 				<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 					<?php echo wp_kses_post( $appointment->get_product_name() ); ?>
@@ -42,7 +42,7 @@ $wc_order    = $appointment->get_order();
 		<?php endif; ?>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment ID', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation ID', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_id() ); ?>
@@ -50,7 +50,7 @@ $wc_order    = $appointment->get_order();
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Date', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Date', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_start_date() ); ?>
@@ -59,7 +59,7 @@ $wc_order    = $appointment->get_order();
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Duration', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Duration', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_duration() ); ?>
@@ -85,7 +85,7 @@ $wc_order    = $appointment->get_order();
 echo make_clickable(
 	sprintf(
 		/* translators: %s: a link to an appointment */
-		esc_html__( 'You can view and edit this appointment in the dashboard here: %s', 'woocommerce-appointments' ),
+		esc_html__( 'You can view and edit this reservation in the dashboard here: %s', 'woocommerce-appointments' ),
 		admin_url( 'post.php?post=' . $appointment->get_id() . '&action=edit' )
 	)
 ); // WPCS: XSS ok.

@@ -54,7 +54,7 @@ defined( 'ABSPATH' ) || exit;
 		if(substr( $duration_split[1], 0, 3 ) === 'day') {
 			$checkin_date = \DateTime::createFromFormat('F d, Y', $date);
 			$checkout_date = $checkin_date;
-			$checkout_date = $checkout_date->modify('+' . ($duration-1) . ' days');
+			$checkout_date = $checkout_date->modify('+' . ($duration_split[0]-1) . ' days');
 			printf(
 				'<li%1$s>%2$s: <strong>%3$s</strong></li>',
 				esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),

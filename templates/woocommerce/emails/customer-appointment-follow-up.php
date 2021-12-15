@@ -28,7 +28,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 <?php
 printf(
 	/* translators: %1$s: appointment start date */
-	esc_html__( 'Your appointment took place on %1$s.', 'woocommerce-appointments' ),
+	esc_html__( 'Your reservation took place on %1$s.', 'woocommerce-appointments' ),
 	esc_html( $appointment->get_start_date() )
 );
 ?>
@@ -37,7 +37,7 @@ printf(
 	<tbody>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Scheduled Product', 'woocommerce-appointments' ); ?>
+			<?php esc_html_e( 'Item / Location', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php echo wp_kses_post( $appointment->get_product_name() ); ?>
@@ -45,7 +45,7 @@ printf(
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment ID', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation ID', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_id() ); ?>
@@ -53,7 +53,7 @@ printf(
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Date', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Date', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_start_date() ); ?>
@@ -61,7 +61,7 @@ printf(
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Duration', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Duration', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_duration() ); ?>

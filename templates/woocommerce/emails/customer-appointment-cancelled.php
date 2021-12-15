@@ -25,13 +25,13 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 
 <?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php esc_html_e( 'We are sorry to say that your appointment could not be confirmed and has been cancelled. The details of the cancelled appointment are shown below.', 'woocommerce-appointments' ); ?></p>
+<p><?php esc_html_e( 'We are sorry to say that your reservation could not be confirmed and has been cancelled. The details of the cancelled reservation are shown below.', 'woocommerce-appointments' ); ?></p>
 
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; margin:0 0 16px;" border="1">
 	<tbody>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Scheduled Product', 'woocommerce-appointments' ); ?>
+			<?php esc_html_e( 'Item / Location', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php echo wp_kses_post( $appointment->get_product_name() ); ?>
@@ -39,7 +39,7 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment ID', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation ID', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_id() ); ?>
@@ -47,7 +47,7 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Date', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Date', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_start_date() ); ?>
@@ -55,7 +55,7 @@ $appointment = $appointment ? $appointment : get_wc_appointment( 0 );
 		</tr>
 		<tr>
 			<th class="td" scope="row" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
-				<?php esc_html_e( 'Appointment Duration', 'woocommerce-appointments' ); ?>
+				<?php esc_html_e( 'Reservation Duration', 'woocommerce-appointments' ); ?>
 			</th>
 			<td class="td" style="text-align:<?php esc_attr_e( $text_align ); ?>;">
 				<?php esc_attr_e( $appointment->get_duration() ); ?>

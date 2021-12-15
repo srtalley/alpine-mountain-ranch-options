@@ -215,7 +215,8 @@ class AMR_WooCommerceAppointments {
     public function change_woocommerce_text_strings () {
         add_filter( 'woocommerce_thankyou_order_received_text', array($this, 'change_woocommerce_thankyou_order_received_text') );
         add_filter( 'gettext', array($this,'change_woocommerce_gettext_strings'), 20, 3 );
-
+        // remove the notice from the checkout 
+        add_filter( 'wc_add_to_cart_message_html', '__return_false' );
     } 
 
     public function change_woocommerce_thankyou_order_received_text() {
@@ -261,7 +262,9 @@ class AMR_WooCommerceAppointments {
         } 
         if($domain == 'woocommerce-appointments') {
             switch ( $translated_text ) {
-
+                case 'Request Confirmation':
+                    $translated_text = __( 'Click to Submit Your Request', 'woocommerce-appointments');
+                    break;
                 case 'Check appointment availability':
                     $translated_text = __( 'Pay Later', 'woocommerce-appointments');
                     break;
@@ -353,7 +356,7 @@ class AMR_WooCommerceAppointments {
                         $_product   = $cart_item['data'] ;
                         $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 
-                        $return_value = '<span class="product-name-left">';
+                        $return_value = '<div class="product-name-left">';
 
                         /* Step 1 : Add delete icon */
                         // $return_value = sprintf(
@@ -365,22 +368,30 @@ class AMR_WooCommerceAppointments {
                         // );
                         
                         /* Step 2 : Add product thumb */
-                        $return_value .= '<span class="wc-checkout-thumbnail">';
-						$thumbnail = $_product->get_image('thumbnail');
-                        $return_value .= '<a href="' . esc_url( $product_permalink ) . '">' . $thumbnail . '</a>'; 
-                        $return_value .= '</span>';
+                        // $thumbnail = $_product->get_the_post_thumbnail_url('full');
+                        $thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $_product->get_id() ), 'single-post-thumbnail' );
+                        if(is_array($thumbnail_src)) {
+                            $thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $_product->get_id() ), 'single-post-thumbnail' )[0];
+                        } else {
+                            $thumbnail = '';
+                        }
+
+                        $return_value .= '<div class="wc-checkout-thumbnail" style="background-image:url(' . $thumbnail . ');">';
+                        // $return_value .= '<a href="' . esc_url( $product_permalink ) . '">' . $thumbnail . '</a>'; 
+                        $return_value .= '<div class="product_name" >' . $product_title . '</div>' ;
+
+                        $return_value .= '</div>';
 
                         /* Step 3 : Add product name */
-                        $return_value .= '<span class="product_name" >' . $product_title . '</span>' ;
 
                         $return_value .= sprintf(
-                            '<a href="%s" class="remove-item" title="%s" data-product_id="%s" data-product_sku="%s">&times; Click to remove this request and start over</a></span>',
+                            '<div class="product-name-middle"><a href="%s" class="remove-item" title="%s" data-product_id="%s" data-product_sku="%s">&times; Click to remove this request and start over</a></div>',
                             esc_url( WC()->cart->get_remove_url( $cart_key ) ),
                             __( 'Remove this item', 'woocommerce' ),
                             esc_attr( $product_id ),
                             esc_attr( $_product->get_sku() )
                         );
-                        $return_value .= '<span class="product-name-bottom"><div class="checkout-details-header">Request Details</div>';
+                        $return_value .= '<div class="product-name-bottom"><div class="checkout-details-header">Request Details</div>';
 
                         /* Step 4 : Add Price ea. */
                         // $return_value .= '<span class="price-each"><strong>Price each:</strong> ' . WC()->cart->get_product_price( $_product ) . '</span>';
@@ -431,13 +442,13 @@ class AMR_WooCommerceAppointments {
         $checkout_date = isset($cart_item['amr_checkout_date']) ? $cart_item['amr_checkout_date']: '';
         if ( ! empty( $checkout_date ) ) {
             $item_data[] = array(
-                'name' => __('Checkin Date', 'woocommerce'),
+                'name' => __('Start Date', 'woocommerce'),
                 'value' => $checkin_date,
             );
         }
         if ( ! empty( $checkout_date ) ) {
             $item_data[] = array(
-                'name' => __('Checkout Date', 'woocommerce'),
+                'name' => __('End Date', 'woocommerce'),
                 'value' => $checkout_date,
             );
         }
