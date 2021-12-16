@@ -3,7 +3,7 @@
 jQuery(function($) {
     $(document).ready(function(){
         setupFormEvents();
-      
+        setupEventCalendarButtons();
     
     }); // end document ready
    
@@ -165,5 +165,23 @@ jQuery(function($) {
     //     duration_drop_down.append('<option data-raw-price="" data-price="" data-price-type="flat_fee" data-raw-duration="1" data-duration=" <span class=&quot;addon-duration&quot;><span class=&quot;amount-symbol&quot;>+</span>1 day</span>" data-duration-type="flat_time" value="2-days-2" data-label="2 Days">2 Days  +1 day</option>');
     //     duration_drop_down.append('<option data-raw-price="" data-price="" data-price-type="flat_fee" data-raw-duration="1" data-duration=" <span class=&quot;addon-duration&quot;><span class=&quot;amount-symbol&quot;>+</span>1 day</span>" data-duration-type="flat_time" value="7-days-7" data-label="7 Days">7 Days  +1 day</option>');
     // }
+    // This is not appointments but is related to the Owners Calendar page - it 
+    // handles the buttons on the event calendar header.
+    function setupEventCalendarButtons() {
+        if($('.events-calendar-switch').length) {
+            $('.events-calendar-switch').on('click', function(e){
+                e.preventDefault();
+
+                // hide all the calendars
+                $('.events-calendar-owners-portal').removeClass('show-calendar');
+                // unselect all buttons
+                $('.events-calendar-switch').removeClass('selected');
+                // get the href
+                var id = $(this).attr('href');
+                $(id).addClass('show-calendar');
+                $(this).addClass('selected');
+            });
+        }
+    }
 });
   
