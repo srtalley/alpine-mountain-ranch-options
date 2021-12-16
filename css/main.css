@@ -776,6 +776,47 @@ div.wpcf7-response-output {
 .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-pao-addon p.form-row:last-of-type {
     margin-bottom: 0;
 }
+/* Simple Google Calendar */
+
+/* Owners Portal Page */
+.events-calendar-owners-portal {
+    display: none;
+}
+.events-calendar-owners-portal.show-calendar {
+    display: block;
+}
+.events-calendar-switch.selected {
+    box-shadow: none;
+    background-color: #1c2a36;
+}
+.simcal-fullcalendar-grid,
+.simcal-default-calendar-list dt.simcal-day-label,
+.simcal-default-calendar-list .simcal-event-details,
+.simcal-fullcalendar-grid div[id*=fullcalendar-] button {
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.simcal-fullcalendar-grid div[id*=fullcalendar-] button {
+    border-color: #bd6d38;
+    background-color: #bd6d38;
+}
+.simcal-fullcalendar-grid .fc-event {
+    font-size: 16px;
+    font-weight: 500;
+}
+.fc .fc-toolbar-title,
+.simcal-default-calendar .simcal-current h3 {
+    font-size: 36px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+.entry-content table:not(.variations).fc-scrollgrid {
+    padding-top: 20px;
+}
+.fc .fc-view-harness-active>.fc-view {
+    bottom: -40px;
+}
 @media (max-width: 767px) {
     .contact-flex .contact-half,
     .contact-flex .contact-third {

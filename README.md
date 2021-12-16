@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.4.0 - 2021-12-15
+* Added items for the Simple Calendar plugin.
+
 #### v1.3.9 - 2021-12-14 
 * Fixed issues in the appointment classes.
 * Updated appointment emails. 
