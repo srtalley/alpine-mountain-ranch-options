@@ -1,34 +1,47 @@
-@media (max-width: 980px) {
-    /* 2021-12-08 */
-    .photo-reel-clip-img.et_pb_gutters1.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
-        width: 25%;
-    }
-    .photo-reel-clip-img.calendar-icon-row {
-        min-height: 22vw;
-    }
-    .photo-reel-clip-img.et_pb_gutters2.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
-        width: 22.75%;
-        margin-right: 3%;
-        margin-bottom: 0;
-        min-height: 20vw;
-    }
-    .photo-reel-clip-img.et_pb_gutters2.et_pb_row_4col>.et_pb_column.et_pb_column_1_4:last-child {
-        margin-right: 0;
-    }
+/********* Mobile Menu Collapse ********/
+  
+/**** This hides the sub menu items on mobile ****/
+  
+#main-header .et_mobile_menu li ul.hide {
+    /* display: none !important; */
 }
-@media (max-width: 480px) {
-    /* 2021-12-08 */
-    .photo-reel-clip-img.et_pb_gutters1.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
-        width: 50% !important;
-        min-height: 40vw;
-    }
-    .photo-reel-clip-img.et_pb_gutters2.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
-        width: 50% !important;
-        margin-right: 0;
-        margin-bottom: 0;
-        min-height: 20vw;
-    }
+      
+    /**** This adjusts the positioning and the background transparency of the parent menu item on mobile ****/
+      
+#mobile_menu .menu-item-has-children {
+    /* position: relative; */
 }
+#mobile_menu .menu-item-has-children > a {
+    /* background: transparent; */
+}
+      
+/**** This styles the icon and moves it to the right ****/
+      
+#mobile_menu .menu-item-has-children > a + span {
+    /* position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 3; */
+}
+      
+/**** Here you can swap out the actual icons ****/
+    
+span.menu-closed:before {
+    /* content: "\4c";
+    display: block;
+    color: #000000;
+    font-size: 16px;
+    font-family: ETmodules; */
+}
+      
+span.menu-closed.menu-open:before {
+    /* content: "\4d"; */
+}
+
 
 .amr-video-lightbox .mfp-content {
     width: 100% !important;
@@ -164,13 +177,15 @@
     transition: all 0.4s ease-in-out;
     display: block;
 } 
-.owners-portal-menu .et-menu > .menu-item.current_page_item > a {
+.owners-portal-menu .et-menu > .menu-item.current_page_item > a,
+.owners-portal-menu .et-menu > .menu-item.current-menu-parent > a {
     background-color: #b56231;
     border-color: #b56231;
 }
 .owners-portal-menu .menu-item a {
     /* padding-bottom: 0 !important; */
 }
+.owners-portal-menu .et-menu > .menu-item.et-touch-hover > a,
 .owners-portal-menu .et-menu > .menu-item:hover > a {
     background-color: #b56231;
     border-color: #b56231;
@@ -180,19 +195,74 @@
     right: 5px;
 }
 .owners-portal-menu nav .et-menu li ul.sub-menu {
-    width: 340px;
-    box-shadow: 1px 1px 1px black;
-    background-color: #7a2f03 !important;
+    width: 290px;
+    /* box-shadow: 1px 1px 1px black; */
+    box-shadow: 1px 1px 6px 2px rgb(0 0 0 / 35%);
+    /* background-color: #7a2f03 !important; */
+    background-color: #fff !important;
+}
+.owners-portal-menu nav .et-menu li ul.sub-menu:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    margin-left: 10%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid #b56231;
 }
 .owners-portal-menu .et-menu .sub-menu li a {
-    /* color: #000 !important; */
+    color: #525252 !important;
     font-weight: 600;
-    width: 300px;
+    width: 250px;
+}
+.owners-portal-menu.et_pb_menu_0.et_pb_menu ul.sub-menu li.current-menu-item a {
+    color: #000 !important;
+
 }
 .owners-portal-menu .et-menu .sub-menu li a:hover {
     opacity: 1;
-    background-color: #552001 !important;
+    background-color: #b56231 !important;
 }
+/* Owners portal menu sticky */
+.owners-portal-menu.et_pb_sticky {
+    box-shadow: 1px 1px 4px 3px rgb(0 0 0 / 18%)
+}
+.owners-portal-menu.et_pb_sticky .et-menu:before {
+    content: 'Owner Portal: ';
+    position: relative;
+    font-weight: 600;
+    font-size: 22px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+}
+.owners-portal-menu.et_pb_sticky.et_pb_menu--without-logo .et_pb_menu__menu>nav>ul>li {
+    margin-top: 0;
+}
+.owners-portal-menu.et_pb_sticky .et-menu > .menu-item > a {
+    /* padding: 0 20px !important; */
+    background-color: transparent !important;
+    /* color: #252525 !important; */
+    border: none !important;
+    margin: 0 !important;
+}
+.owners-portal-menu .et-menu > .menu-item.current_page_item > a,
+.owners-portal-menu .et-menu > .menu-item.current-menu-parent > a {
+    font-weight: 500;
+}
+.owners-portal-menu.et_pb_sticky.et_pb_menu_0.et_pb_menu ul li.current-menu-item a:hover {
+    /* color: #252525 !important; */
+    color: #fff !important;
+}
+.owners-portal-menu.et_pb_sticky nav .et-menu li ul.sub-menu:before {
+    display: none;
+}
+
+
 .calendar-icon-row .et_pb_column {
     display: flex;
     flex-direction: column;
@@ -799,6 +869,7 @@ div.wpcf7-response-output {
 .simcal-fullcalendar-grid div[id*=fullcalendar-] button {
     border-color: #bd6d38;
     background-color: #bd6d38;
+    margin-bottom: 10px;
 }
 .simcal-fullcalendar-grid .fc-event {
     font-size: 16px;
@@ -813,9 +884,126 @@ div.wpcf7-response-output {
 }
 .entry-content table:not(.variations).fc-scrollgrid {
     padding-top: 20px;
+
+}
+.entry-content table:not(.variations).fc-scrollgrid,
+.entry-content table:not(.variations).fc-scrollgrid-sync-table {
+	/* 2021/12/16 fix for the Simple calendar table */
+	margin: 0 !important;
+}
+.simcal-default-calendar-list .simcal-event-details p {
+    margin: 0;
+    padding-bottom: 10px;
+}
+.simcal-default-calendar-list .simcal-event-details p:last-of-type {
+    padding-bottom: 0;
+}
+.simcal-default-calendar-list ul.simcal-events {
+    padding-bottom: 0;
+    column-count: 2;
+    column-width: 350px;
+}
+.simcal-default-calendar-list ul.simcal-events li.simcal-event {
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+    margin-bottom: 20px;
+}
+.simcal-default-calendar-list ul.simcal-events li.simcal-event:last-of-type {
+    margin-bottom: 0;
+}
+.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title {
+    padding-left: 5px;
 }
 .fc .fc-view-harness-active>.fc-view {
-    bottom: -40px;
+    /* bottom: -60px; */
+}
+.simcal-fullcal-qtip-id-2 {
+    box-shadow: 2px 2px 2px black;
+}
+.tippy-content {
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px 3px rgb(0 0 0 / 30%);
+    background-color: #fff;
+}
+.tippy-arrow {
+    z-index: 9;
+}
+.tippy-arrow:before {
+    -webkit-filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, .3));
+    filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, .3));
+}
+.fc-header-toolbar.fc-toolbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:nth-child(1) {
+    flex: 0 0 220px;
+}
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:nth-child(2) {
+    flex: 1 1 20%;
+    text-align: center;
+}
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:nth-child(3) {
+    flex: 0 0 220px;
+    text-align: right;
+}
+@media (min-width: 600px) and (max-width: 980px) {
+    #owners-portal-menu.et_pb_menu .et_pb_menu__menu {
+        display: block;
+    }
+    #owners-portal-menu .et_mobile_nav_menu {
+        display: none;
+    }
+    #owners-portal-menu.et_pb_menu_0.et_pb_menu ul li a {
+        color: #fff !important;
+        font-size: 17px;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 15px 20px !important;
+    }
+    #owners-portal-menu.et_pb_menu_0.et_pb_menu ul.sub-menu li a {
+        /* color: #252525 !important; */
+    }
+    #owners-portal-menu.et_pb_sticky.et_pb_menu_0.et_pb_menu ul li a {
+        /* color: #252525 !important; */
+    }
+    .owners-portal-menu.et_pb_sticky .et-menu:before {
+        display: none;
+    }
+}
+@media (max-width: 980px) {
+
+
+    #owners-portal-menu nav .et-menu li ul.sub-menu {
+        /* position: relative; */
+    }
+    #owners-portal-menu.et_pb_menu .et_pb_menu__menu>nav>ul>li {
+        /* flex-wrap: wrap; */
+    }
+    #owner-resources-list .et_pb_column_1_3  {
+        width: 33%;
+        margin-right: 2.5%;
+    }
+    #owner-resources-list .et_pb_column_2_3 {
+        width: 64.5%;
+    }
+    /* 2021-12-08 */
+    .photo-reel-clip-img.et_pb_gutters1.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
+        width: 25%;
+    }
+    .photo-reel-clip-img.calendar-icon-row {
+        min-height: 22vw;
+    }
+    .photo-reel-clip-img.et_pb_gutters2.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
+        width: 22.75%;
+        margin-right: 3%;
+        margin-bottom: 0;
+        min-height: 20vw;
+    }
+    .photo-reel-clip-img.et_pb_gutters2.et_pb_row_4col>.et_pb_column.et_pb_column_1_4:last-child {
+        margin-right: 0;
+    }
 }
 @media (max-width: 767px) {
     .contact-flex .contact-half,
@@ -829,8 +1017,71 @@ div.wpcf7-response-output {
     #page-container .DOPBSPCalendar-wrapper .DOPBSPCalendar-sidebar form {
         margin-left: 0;
     }
+    .fc .fc-toolbar-title,
+    .simcal-default-calendar .simcal-current h3 {
+        font-size: 30px;
+        text-align: center;
+    }
+    .events-calendar-owners-portal,
+    .events-calendar-owners-portal.show-calendar {
+        display: none;
+    }
+    #events-calendar-list {
+        display: block;
+    }
+}
+@media (max-width: 599px) {
+    #owners-portal-menu.et_pb_menu .et_mobile_nav_menu .mobile_menu_bar {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+    }
+    #owners-portal-menu.et_pb_menu .et_mobile_nav_menu .mobile_menu_bar:after {
+        content: 'Owner Portal Menu';
+        color: #fff;
+        margin-right: 20px;
+        font-weight: 600;
+    }
+    #owners-portal-menu.et_pb_menu:not(.et_pb_sticky) .et_mobile_nav_menu {
+        margin-top: -10px;
+        margin-bottom: 5px;
+    }
+    #owners-portal-menu.et_pb_menu.et_pb_sticky .et_mobile_nav_menu {
+        margin-bottom: 3px;
+    }
+    #owners-portal-menu.et_pb_menu.et_pb_sticky  ul li.current-menu-item a, .et_pb_sticky.et_pb_menu_0.et_pb_menu ul li.current-menu-item a {
+        color: #B56231 !important;
+    }
+}
+@media (max-width: 700px) {
+
+    #owner-resources-list .et_pb_column_1_3  {
+        width: 100%;
+        margin-right: 0;
+    }
+    #owner-resources-list .et_pb_column_2_3 {
+        width: 100%;
+    }
+    #owner-resources-list .document-headings .et_pb_main_blurb_image {
+        display: none !important;
+    }
+    #owner-resources-list .document-headings .et_pb_blurb_container {
+        padding-left: 0;
+    }
+
 }
 @media (max-width: 480px) {
+    /* 2021-12-08 */
+    .photo-reel-clip-img.et_pb_gutters1.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
+        width: 50% !important;
+        min-height: 40vw;
+    }
+    .photo-reel-clip-img.et_pb_gutters2.et_pb_row_4col>.et_pb_column.et_pb_column_1_4 {
+        width: 50% !important;
+        margin-right: 0;
+        margin-bottom: 0;
+        min-height: 20vw;
+    }
     .wc-appt-checkin-checkout-dates > div,
     .wc-appt-starttime-endtime > div {
         flex-basis: 100%;

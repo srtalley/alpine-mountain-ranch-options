@@ -115,8 +115,66 @@ jQuery(function($) {
 
         } // if not safari
       
-    
+        //check if an anchor was clicked and scroll to the proper place
+        $('a[href*=\\#]').on('click', function () {
+            if(this.hash != '') {
+                if(this.pathname === window.location.pathname){
+                    // smooth_scroll_to_anchor_top($(this.hash));
+                } 
+            }
+        });
     }); // end document ready
+
+
+    $(window).load(function(){
+        console.log('window load no scroll');
+        //Scrolling animation for anchor tags
+        if(window.location.hash) {
+        //   smooth_scroll_to_anchor_top($(window.location.hash));
+        }
+        setTimeout(function() {
+        //   setup_collapsible_submenus();
+        }, 700);
+    
+    }); // end window load 
+
+    // scroll to the top of the anchor with an offset on desktops
+    function smooth_scroll_to_anchor_top(anchor){
+        console.log('smooth scroll again again');
+        if($(anchor) != 'undefined' ) {
+        var window_media_query_980 = window.matchMedia("(max-width: 980px)")
+        if(window_media_query_980.matches) {
+            var offset_amount = 0;
+        } else {
+
+            var top_header_height = parseInt($('#top-header').outerHeight(true)) || 0;
+            var main_header_height = parseInt($('#main-header').outerHeight(true)) || 0;
+            var admin_bar_height = parseInt($('#wpadminbar').outerHeight(true)) || 0;
+            var owner_portal_sticky_bar_height = parseInt($('#owners-portal-menu.et_pb_sticky').outerHeight(true)) || 0;
+
+            console.log($('#owners-portal-menu.et_pb_sticky'));
+            console.log(owner_portal_sticky_bar_height);
+            var offset_amount = top_header_height + main_header_height + admin_bar_height + owner_portal_sticky_bar_height;
+            console.log(offset_amount);
+        }
+
+        $('html,body').animate({scrollTop:($(anchor).offset().top - offset_amount) + 'px'}, 1000);
+        }
+    } // end function
+
+    function setup_collapsible_submenus() {
+        // mobile menu
+        $('#mobile_menu .menu-item-has-children > a').after('<span class="menu-closed"></span>');
+        $('#mobile_menu .menu-item-has-children > a').each(function() {
+            $(this).next().next('.sub-menu').toggleClass('hide',1000);
+        });
+        $('#mobile_menu .menu-item-has-children > a + span').on('click', function(event) {
+            event.preventDefault();
+            $(this).toggleClass('menu-open');
+            $(this).next('.sub-menu').toggleClass('hide',1000);
+        });
+    }
+
     /**
      * Detect Safari
      */
