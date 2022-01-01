@@ -4,7 +4,7 @@ Plugin Name: Alpine Mountain Ranch Options
 Description: Modifications specific to AMR
 Author: Dusty Sun
 Author URI: https://dustysun.com
-Version: 1.4.1
+Version: 1.4.1f
 Text Domain: alpinemountainranch
 License: GPLv2
 */
@@ -22,6 +22,7 @@ require_once( dirname( __FILE__ ) . '/lib/dustysun-wp-settings-api/ds_wp_setting
 require_once( dirname( __FILE__ ) . '/classes/amr-woocommerce-appointments.php');
 
 require_once( dirname( __FILE__ ) . '/classes/amr-eventsmanager.php');
+require_once( dirname( __FILE__ ) . '/classes/amr-owner-portal.php');
 
 // require_once( dirname( __FILE__ ) . '/classes/amr-pinpoint-booking.php');
 
