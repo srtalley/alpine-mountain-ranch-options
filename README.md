@@ -1,7 +1,10 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
-#### v1.4.0 - 2021-12-16
+#### v1.4.2 - 2022-01-04
+* Updates to the Events Manager code to automatically pull a winter or summer header.
+
+#### v1.4.1 - 2021-12-16
 * Additional styling changes to the calendar.
 * Owners' Portal menu changes.
 
