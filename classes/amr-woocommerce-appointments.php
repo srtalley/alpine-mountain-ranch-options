@@ -1,10 +1,11 @@
 <?php
+
 namespace AlpineMountainRanch;
 
 class AMR_WooCommerceAppointments {
 
     public function __construct() {
-   
+
         // WooCommerce template path
         add_filter( 'woocommerce_locate_template', array( $this, 'woocommerce_locate_template' ), 10, 3 );
         // add_filter('widget_title', array($this, 'change_title'));
@@ -45,41 +46,41 @@ class AMR_WooCommerceAppointments {
     // public function change_woocommerce_appointments_time_slots_html($slots_html, $slots, $intervals, $time_to_check, $staff_id, $from, $to, $timezone, $thisme, $appointments) {
     // }
     /**
-         * Add WooCommerce template location
-         */
-        function woocommerce_locate_template( $template, $template_name, $template_path ) {
+     * Add WooCommerce template location
+     */
+    public function woocommerce_locate_template( $template, $template_name, $template_path ) {
 
-            global $woocommerce;
+        global $woocommerce;
 
-            $_template = $template;
+        $_template = $template;
 
-            if ( !$template_path ) {
-                $template_path = $woocommerce->template_url;
-            }
-
-            $plugin_path = AMR_TEMPLATE_PATH . 'woocommerce/';
-
-            // Look within passed path within the theme - this is priority
-            $template = locate_template(
-                array(
-                    $template_path . $template_name,
-                    $template_name
-                )
-            );
-
-            // Modification: Get the template from this plugin, if it exists
-            if ( !$template && file_exists( $plugin_path . $template_name ) ) {
-                $template = $plugin_path . $template_name;
-            }
-
-            // Use default template
-            if ( !$template ) {
-                $template = $_template;
-            }
-
-            // Return what we found
-            return $template;
+        if ( !$template_path ) {
+            $template_path = $woocommerce->template_url;
         }
+
+        $plugin_path = AMR_TEMPLATE_PATH . 'woocommerce/';
+
+        // Look within passed path within the theme - this is priority
+        $template = locate_template(
+            array(
+                $template_path . $template_name,
+                $template_name
+            )
+        );
+
+        // Modification: Get the template from this plugin, if it exists
+        if ( !$template && file_exists( $plugin_path . $template_name ) ) {
+            $template = $plugin_path . $template_name;
+        }
+
+        // Use default template
+        if ( !$template ) {
+            $template = $_template;
+        }
+
+        // Return what we found
+        return $template;
+    }
     
     // function hide_my_item_meta( $hidden_meta ) {
 
@@ -98,9 +99,18 @@ class AMR_WooCommerceAppointments {
 
             $html = '';
             if($duration_unit == 'day') {
-                $html .= '<div class="wc-appt-checkin-checkout-dates">';
-                $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">Start Date: </span> <span class="checkin-value"></span></div>';
-                $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">End Date: </span> <span class="checkout-value"></span></div>';
+                if($product_id == 211976) {
+                    $start_label = 'Check In:';
+                    $end_label = 'Check Out:';
+                    $type = 'type-guest-cabin';
+                } else {
+                    $start_label = 'Start Date:';
+                    $end_label = 'End Date:';
+                    $type = 'type-other';
+                }
+                $html .= '<div class="wc-appt-checkin-checkout-dates ' . $type . '">';
+                $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">' . $start_label . ' </span> <span class="checkin-value"></span></div>';
+                $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">' . $end_label . ' </span> <span class="checkout-value"></span></div>';
                 $html .= '</div>';
             }
             if($duration_unit == 'hour') {
@@ -138,27 +148,30 @@ class AMR_WooCommerceAppointments {
      * Redirect to the owners portal calendar page
      */
     function empty_cart_redirection(){
-        if( is_cart() ) :
+        if(function_exists('is_cart')) {
+            if( is_cart() ) :
         
-        // Here set the Url redirection
-        $url_redirection = site_url('/owners-portal/calendars');
-        
-        // When trying to access cart page if cart is already empty  
-        if( WC()->cart->is_empty() ){
-            wp_safe_redirect( $url_redirection );
-            exit();
-        }
-        
-        // When emptying cart on cart page
-        wc_enqueue_js( "jQuery(function($){
-            $(document.body).on( 'wc_cart_emptied', function(){
-                if ( $( '.woocommerce-cart-form' ).length === 0 ) {
-                    $(window.location).attr('href', '" . $url_redirection . "');
-                    return;
+                // Here set the Url redirection
+                $url_redirection = site_url('/owners-portal/calendars');
+                
+                // When trying to access cart page if cart is already empty  
+                if( WC()->cart->is_empty() ){
+                    wp_safe_redirect( $url_redirection );
+                    exit();
                 }
-            });
-        });" );
-        endif;
+                
+                // When emptying cart on cart page
+                wc_enqueue_js( "jQuery(function($){
+                    $(document.body).on( 'wc_cart_emptied', function(){
+                        if ( $( '.woocommerce-cart-form' ).length === 0 ) {
+                            $(window.location).attr('href', '" . $url_redirection . "');
+                            return;
+                        }
+                    });
+                });" );
+                endif;
+        }
+      
     }
     /**
      * Add the data from the appointable form fields to the 
@@ -441,16 +454,33 @@ class AMR_WooCommerceAppointments {
         $checkin_date = isset($cart_item['amr_checkin_date']) ? $cart_item['amr_checkin_date']: '';
         $checkout_date = isset($cart_item['amr_checkout_date']) ? $cart_item['amr_checkout_date']: '';
         if ( ! empty( $checkout_date ) ) {
-            $item_data[] = array(
-                'name' => __('Start Date', 'woocommerce'),
-                'value' => $checkin_date,
-            );
+            if($cart_item['product_id'] == 211976) {
+                $item_data[] = array(
+                    'name' => __('Check In', 'woocommerce'),
+                    'value' => '4 PM, ' . $checkin_date,
+                );
+            } else {
+                $item_data[] = array(
+                    'name' => __('Start Date', 'woocommerce'),
+                    'value' => $checkin_date,
+                );
+            }
+
         }
         if ( ! empty( $checkout_date ) ) {
-            $item_data[] = array(
-                'name' => __('End Date', 'woocommerce'),
-                'value' => $checkout_date,
-            );
+            if($cart_item['product_id'] == 211976) {
+                // $date = date_create($checkout_date);
+                $tomorrow = date('F j, Y',strtotime($checkout_date . "+1 days"));
+                $item_data[] = array(
+                    'name' => __('Check Out', 'woocommerce'),
+                    'value' => '10 AM, ' . $tomorrow,
+                );
+            } else {
+                $item_data[] = array(
+                    'name' => __('End Date', 'woocommerce'),
+                    'value' => $checkout_date,
+                );
+            }
         }
         
         $appt_date = isset($cart_item['amr_appt_date']) ? $cart_item['amr_appt_date']: '';

@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.4.4 - 2022-03-31
+* Updates to the Guest Cabin check in and check out times.
+
 #### v1.4.2 - 2022-01-04
 * Updates to the Events Manager code to automatically pull a winter or summer header.
 

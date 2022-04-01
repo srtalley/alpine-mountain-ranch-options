@@ -4,10 +4,9 @@ namespace AlpineMountainRanch;
 /**
  * Pairs with the Magnific Lightbox which is already part of the Divi theme
  */
-class AMR_Lightbox {
+class AMR_Divi {
 
     public function __construct() {
-    
     }
 
 

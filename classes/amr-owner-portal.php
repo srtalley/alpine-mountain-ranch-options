@@ -5,9 +5,32 @@ class AMR_OwnerPortal {
 
     public function __construct() {
         add_filter('the_password_form', array($this, 'change_password_protection_message'), 9999, 1 );
+        add_filter( 'post_password_required', array($this, 'hoa_docs_bypass_link'), 100, 1);
     }
 
-    function change_password_protection_message ($output) {
+    /**
+     * Adds a way to bypass the password protection with a special link
+     */
+    public function hoa_docs_bypass_link ($value) {
+        // get the current page slug
+        $current_page = get_page_by_path('owner-portal/owner-resources');
+        if(is_object($current_page)) {
+            $owner_portal_docs_id = $current_page->ID;
+            if(get_the_ID() == $owner_portal_docs_id) {
+                // get the current get variable
+                if(isset($_GET['owner_resources_access']) && $_GET['owner_resources_access'] == 'guest2022') {
+                    return false;
+                }
+            }
+        }
+       
+        return $value;
+    }
+
+    /** 
+     * Change the password message displayed
+     */
+    public function change_password_protection_message ($output) {
         $owner_portal_id = get_page_by_path('owner-portal')->ID;
 
         // see if the ID matches. If not check for parent pages that match.

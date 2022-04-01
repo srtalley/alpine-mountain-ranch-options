@@ -1,4 +1,4 @@
-//version: 1.3.3
+//version: 1.4.4
 
 jQuery(function($) {
     $(document).ready(function(){
@@ -6,7 +6,15 @@ jQuery(function($) {
         setupEventCalendarButtons();
     
     }); // end document ready
-   
+
+    /**
+     * Function for adding days to a date
+     */
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
 
     function setupFormEvents() {
 
@@ -14,23 +22,28 @@ jQuery(function($) {
 
         var form = $('.wc-appointments-appointment-form-wrap.cart');
         // get changed durations
-        form.on( 'addon-duration-changed', function(event ,duration) {
+        form.on( 'addon-duration-changed', function(event, duration) {
             var currentForm = $(this);
-            // var picker = currentForm.find('.picker');
 
             // var appointment_duration = parseInt( form.find('.picker').attr( 'data-appointment_duration' ), 10 );
             var addon_duration = parseInt( duration, 10 );
-            // var combined_duration = parseInt( appointment_duration + addon_duration, 10 );
-            // $(currentForm).find('.checkout-value').html(duration);
+            var checkin_checkout_div = currentForm.find('.wc-appt-checkin-checkout-dates');
 
-            selectedDate.setDate(selectedDate.getDate() + addon_duration);
+            var type = 'other';
+            if(checkin_checkout_div.hasClass('type-guest-cabin')) {
+                addon_duration++;
+                type = 'guest_cabin';
+            }
+            var endDate = addDays(selectedDate, addon_duration);
+            var month = endDate.toLocaleString('default', { month: 'long' });
 
-            var month = selectedDate.toLocaleString('default', { month: 'long' });
-
-            $(currentForm).find('.checkout-value').html(month + ' ' + selectedDate.getDate().toString() + ',' + selectedDate.getFullYear().toString());
+            if(type == 'guest_cabin') {
+                $(currentForm).find('.checkout-value').html('10 AM, ' + month + ' ' + endDate.getDate().toString() + ', ' + endDate.getFullYear().toString());
+            } else {
+                $(currentForm).find('.checkout-value').html(month + ' ' + endDate.getDate().toString() + ', ' + endDate.getFullYear().toString());
+            }
 
             // see if there are unavailble dates that have been selected
-
             var selected_days = $(currentForm).find('.ui-datepicker-selected-day');
             $(selected_days).each(function() {
                 if($(this).hasClass('fully_scheduled') || $(this).hasClass('not_appointable')) {
@@ -40,31 +53,74 @@ jQuery(function($) {
                     $(currentForm).find('.wc-appt-error').slideUp();
                     $(currentForm).find('.wc-appointments-appointment-form-button').prop('disabled', false);
                 }
-            })
-            // setupFormCheckoutDate(currentForm);
+            });
+            if(type == 'guest_cabin') {
+                $(currentForm).find('.ui-datepicker-checkout-day').removeClass('ui-datepicker-checkout-day');
+
+                var last_selected_day = $(selected_days).last();
+
+                if(last_selected_day.length) {
+                    $(currentForm).find('.ui-datepicker-checkout-day').removeClass('ui-datepicker-checkout-day');
+                    var add_checkout_day = last_selected_day.nextAll( 'td' ).add( last_selected_day.closest( 'tr' ).nextAll().find( 'td' ) ).slice( 0, 1 ).addClass( 'ui-datepicker-checkout-day' );
+                } else {
+                    var selected_day = $(currentForm).find('.ui-datepicker-current-day');
+                    var add_checkout_day = selected_day.nextAll( 'td' ).add( selected_day.closest( 'tr' ).nextAll().find( 'td' ) ).slice( 0, 1 ).addClass( 'ui-datepicker-checkout-day' );
+                }
+
+            }
         } );
 
         // get the start date
         form.on( 'date-selected', function(event, data) {
-
             var currentForm = $(this);
             var picker = currentForm.find('.picker');
             var stringDate = data;
             var date = stringDate.split("-"); 
             selectedDate = new Date(date[0],date[1]-1,date[2]);//Date object
             if(picker.data('duration_unit') == 'day') {
+                // Get the reservation type
+                var checkin_checkout_div = currentForm.find('.wc-appt-checkin-checkout-dates');
+
+
+                // if(type == 'guest-cabin') {
+                //     var last_selected_day = $(selected_days).last();
+                //     var add_checkout_day = last_selected_day.nextAll( 'td' ).add( last_selected_day.closest( 'tr' ).nextAll().find( 'td' ) ).slice( 0, 1 ).addClass( 'ui-datepicker-checkout-day' );
+                // }
+
+
                 // reset the added days when changing a date
                 picker.data( 'combined_duration', 1 );
                 picker.data( 'addon_duration', 0 );
+                if(checkin_checkout_div.hasClass('type-guest-cabin')) {
+                    var type = 'guest_cabin';
+                    var combined_duration = picker.data( 'combined_duration' ) ? parseInt(picker.data( 'combined_duration' )) + 1 : 2;
 
-                var combined_duration = picker.data( 'combined_duration' ) ? picker.data( 'combined_duration' ) : 1;
+                    // This needs a delay so that the classes are in place
+                    setTimeout(function() {
+                        $(currentForm).find('.ui-datepicker-checkout-day').removeClass('ui-datepicker-checkout-day');
+                        var selected_day = $(picker).find('.ui-datepicker-current-day');
+                        var add_checkout_day = selected_day.nextAll( 'td' ).add( selected_day.closest( 'tr' ).nextAll().find( 'td' ) ).slice( 0, 1 ).addClass( 'ui-datepicker-checkout-day' );
+                    }, 500);
+                   
+                } else {
+                    var type = 'other';
+                    var combined_duration = picker.data( 'combined_duration' ) ? picker.data( 'combined_duration' ) : 1;
+                }
 
                 var month = selectedDate.toLocaleString('default', { month: 'long' });
-                $(currentForm).find('.checkin-value').html(month + ' ' + date[2] + ', ' + date[0]);
 
-                if(combined_duration == 1) {
-                    $(currentForm).find('.checkout-value').html(month + ' ' + date[2] + ', ' + date[0]);
+                if(type == 'guest_cabin') {
+                    var endDate = addDays(selectedDate, 1);
+                    var endMonth = endDate.toLocaleString('default', { month: 'long' });
+                    $(currentForm).find('.checkin-value').html('4 PM, ' + month + ' ' + date[2] + ', ' + date[0]);
+                    $(currentForm).find('.checkout-value').html('10 AM, ' + endMonth + ' ' + endDate.getDate().toString() + ', ' + endDate.getFullYear().toString());
+                } else {
+                    $(currentForm).find('.checkin-value').html(month + ' ' + date[2] + ', ' + date[0]);
+                    if(combined_duration == 1) {
+                        $(currentForm).find('.checkout-value').html(month + ' ' + date[2] + ', ' + date[0]);
+                    }
                 }
+
 
                 currentForm.find('.wc-pao-addon-select').val('');
                 // uncheck other items
@@ -77,11 +133,9 @@ jQuery(function($) {
             } // end day
             if(picker.data('duration_unit') == 'hour') {
                 setTimeout(function() {
-                    console.log('bad');
                     // see if there are blank spots
                     var slotpicker = currentForm.find('.slot-picker');
                     var slot_column = slotpicker.find('.slot_column');
-                    console.log(slot_column);
                     $(slot_column).each(function() {
                         if($(this).children().hasClass('slot_empty')){
                             $(this).addClass('hide-slot_column');
