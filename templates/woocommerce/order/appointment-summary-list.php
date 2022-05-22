@@ -48,26 +48,22 @@ defined( 'ABSPATH' ) || exit;
 			esc_attr( $duration )
 		);
 
-
-
 		$duration_split = explode(' ', $duration);
 		if(substr( $duration_split[1], 0, 3 ) === 'day') {
 			$checkin_date = \DateTime::createFromFormat('F d, Y', $date);
 			$checkout_date = $checkin_date;
-			$checkout_date = $checkout_date->modify('+' . ($duration_split[0]-1) . ' days');
-			printf(
-				'<li%1$s>%2$s: <strong>%3$s</strong></li>',
-				esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
-				esc_html__( 'End Date', 'woocommerce-appointments' ),
-				esc_attr( $checkout_date->format('F d, Y') )
-			);
-
-
-
+			// make sure not bool
+			if ($checkout_date instanceof \DateTime) {
+				$checkout_date = $checkout_date->modify('+' . ($duration_split[0]-1) . ' days');
+				printf(
+					'<li%1$s>%2$s: <strong>%3$s</strong></li>',
+					esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
+					esc_html__( 'End Date', 'woocommerce-appointments' ),
+					esc_attr( $checkout_date->format('F d, Y') )
+				);
+			}
 		}
 		if(substr( $duration_split[1], 0, 4 ) === 'hour') {
-
-
 
 			// calculate start time and end time
 			$start_datetime = \DateTime::createFromFormat('F d, Y, g:i a', $date);

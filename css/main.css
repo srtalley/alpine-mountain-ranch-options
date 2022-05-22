@@ -863,7 +863,7 @@ div.wpcf7-response-output {
     display: flex ;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     margin: 0 -10px;
 }
 .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after .amr-start-addon-fields .wc-pao-addon {
@@ -890,6 +890,10 @@ div.wpcf7-response-output {
     -webkit-appearance: none;
     height: 48px;
 }
+.wc-pao-addon-name a {
+    border-bottom: 1px solid #b56231;
+    color: #b56231 !important;
+}
 .wc-pao-addon-select {
     display: block;
     padding: 0;
@@ -913,6 +917,11 @@ div.wpcf7-response-output {
 .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-pao-addon p.form-row:last-of-type {
     margin-bottom: 0;
 }
+/* FLY FISHING */
+div[data-product-name="Fly Fishing"].wc-pao-addon-container.wc-pao-addon.wc-pao-addon-guest-name {
+    flex-basis: 100% !important;
+}
+
 /* Simple Google Calendar */
 
 /* Owners Portal Page */

@@ -41,6 +41,7 @@ class AMR_WooCommerceAppointments {
         add_filter( 'woocommerce_order_item_get_formatted_meta_data', array($this, 'change_order_display_meta'), 10, 1 );
 
         // add_filter( 'woocommerce_appointments_time_slots_html', array($this, 'change_woocommerce_appointments_time_slots_html'), 10, 10 );
+        add_filter( 'get_product_addons_fields', array($this, 'change_addon_field_labels'), 10, 2 );
     }
 
     // public function change_woocommerce_appointments_time_slots_html($slots_html, $slots, $intervals, $time_to_check, $staff_id, $from, $to, $timezone, $thisme, $appointments) {
@@ -535,6 +536,20 @@ class AMR_WooCommerceAppointments {
             }
         }
         return $temp_metas;
+    }
+    /**
+     * Change labels for addons, adding HTML as needed
+     */
+    public function change_addon_field_labels($product_addons, $post_id) {
+        foreach($product_addons as $key => $product_addon) {
+            if($product_addon['name'] == 'Do you have a fishing license? Fishing license is required (open link to purchase)') {
+                $product_addon['name'] = 'Do you have a fishing license? Fishing license is required (<a href="https://www.cpwshop.com/licensing.page?&e4q=e671b5c6-941e-4be5-8473-8d46e16e79c4&e4p=139958f9-9196-4397-9917-b993bb9fab51&e4ts=1651706512&e4c=aspira&e4e=snasoco01&e4rt=Safetynet&e4h=b135c2b59ca60612abfc0485201b17a3" target="_blank">open link to purchase</a>)';
+                $product_addons[$key] = $product_addon;
+            }
+
+        }
+        wl(	$product_addons);
+        return $product_addons;
     }
 } // end class AMR_WooCommerceAppointments
 

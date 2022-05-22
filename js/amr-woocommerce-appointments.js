@@ -4,7 +4,6 @@ jQuery(function($) {
     $(document).ready(function(){
         setupFormEvents();
         setupEventCalendarButtons();
-    
     }); // end document ready
 
     /**
@@ -237,5 +236,6 @@ jQuery(function($) {
             });
         }
     }
+
 });
   

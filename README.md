@@ -1,6 +1,10 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.4.5 - 2022-05-04
+* Updates to the booking page to change labels and add links as needed.
+* Fix for fatal error in the duration calculation for the summary page.
+
 #### v1.4.4 - 2022-03-31
 * Updates to the Guest Cabin check in and check out times.
 
