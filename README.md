@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.4.6 - 2022-06-09
+* Updates to support Fly Fishing options.
+
 #### v1.4.5 - 2022-05-04
 * Updates to the booking page to change labels and add links as needed.
 * Fix for fatal error in the duration calculation for the summary page.

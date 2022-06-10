@@ -4,6 +4,7 @@ jQuery(function($) {
     $(document).ready(function(){
         setupFormEvents();
         setupEventCalendarButtons();
+        setupFlyFishingOptions();
     }); // end document ready
 
     /**
@@ -233,6 +234,30 @@ jQuery(function($) {
                 var id = $(this).attr('href');
                 $(id).addClass('show-calendar');
                 $(this).addClass('selected');
+            });
+        }
+    }
+
+    /**
+     * Do things when options are selected
+     */
+    function setupFlyFishingOptions() {
+        var fly_fishing_owner_licensed_guide = $('.wc-pao-addon-212111-type-6-1');
+        if(fly_fishing_owner_licensed_guide.length) {
+            $('body').on('click', '.wc-pao-addon-212111-type-6-1 input[name="addon-212111-type-6[]"]', function() {
+                if(!$('.wc-pao-addon-licensed-guide-company-name, .wc-pao-addon-licensed-guide-contact-number').hasClass('required_added')) {
+                    $('.wc-pao-addon-licensed-guide-company-name label, .wc-pao-addon-licensed-guide-contact-number label').append('<em class="required" title="Required field">*</em>');
+                }
+
+                $('.wc-pao-addon-licensed-guide-company-name, .wc-pao-addon-licensed-guide-contact-number').addClass('show_fields required_added');
+                $('.wc-pao-addon-licensed-guide-company-name input, .wc-pao-addon-licensed-guide-contact-number input').attr('required', true);
+                    
+            });
+            $('body').on('click', '.wc-pao-addon-212111-type-6-0 input[name="addon-212111-type-6[]"],.wc-pao-addon-212111-type-6-2 input[name="addon-212111-type-6[]"]', function() {
+
+                $('.wc-pao-addon-licensed-guide-company-name, .wc-pao-addon-licensed-guide-contact-number').removeClass('show_fields');
+                $('.wc-pao-addon-licensed-guide-company-name input, .wc-pao-addon-licensed-guide-contact-number input').attr('required', false);
+
             });
         }
     }

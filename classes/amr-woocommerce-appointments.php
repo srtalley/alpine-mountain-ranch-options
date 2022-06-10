@@ -100,6 +100,7 @@ class AMR_WooCommerceAppointments {
 
             $html = '';
             if($duration_unit == 'day') {
+
                 if($product_id == 211976) {
                     $start_label = 'Check In:';
                     $end_label = 'Check Out:';
@@ -109,10 +110,18 @@ class AMR_WooCommerceAppointments {
                     $end_label = 'End Date:';
                     $type = 'type-other';
                 }
-                $html .= '<div class="wc-appt-checkin-checkout-dates ' . $type . '">';
-                $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">' . $start_label . ' </span> <span class="checkin-value"></span></div>';
-                $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">' . $end_label . ' </span> <span class="checkout-value"></span></div>';
-                $html .= '</div>';
+                if($product_id == 212111) {
+                    $html .= '<div class="wc-appt-checkin-checkout-dates ' . $type . '">';
+                    $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">Date: </span> <span class="checkin-value"></span></div>';
+                    // $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">' . $end_label . ' </span> <span class="checkout-value"></span></div>';
+                    $html .= '</div>';
+                } else {
+                    $html .= '<div class="wc-appt-checkin-checkout-dates ' . $type . '">';
+                    $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">' . $start_label . ' </span> <span class="checkin-value"></span></div>';
+                    $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">' . $end_label . ' </span> <span class="checkout-value"></span></div>';
+                    $html .= '</div>';
+                }
+
             }
             if($duration_unit == 'hour') {
                 $html .= '<div class="wc-appt-starttime-endtime">';
@@ -548,7 +557,6 @@ class AMR_WooCommerceAppointments {
             }
 
         }
-        wl(	$product_addons);
         return $product_addons;
     }
 } // end class AMR_WooCommerceAppointments

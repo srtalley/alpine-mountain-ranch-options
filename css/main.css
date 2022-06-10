@@ -921,6 +921,12 @@ div.wpcf7-response-output {
 div[data-product-name="Fly Fishing"].wc-pao-addon-container.wc-pao-addon.wc-pao-addon-guest-name {
     flex-basis: 100% !important;
 }
+.wc-pao-addon-licensed-guide-company-name, .wc-pao-addon-licensed-guide-contact-number {
+    display: none;
+}
+.wc-pao-addon-licensed-guide-company-name.show_fields, .wc-pao-addon-licensed-guide-contact-number.show_fields {
+    display: block;
+}
 
 /* Simple Google Calendar */
 
