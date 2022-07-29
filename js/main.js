@@ -127,7 +127,6 @@ jQuery(function($) {
 
 
     $(window).load(function(){
-        console.log('window load no scroll');
         //Scrolling animation for anchor tags
         if(window.location.hash) {
         //   smooth_scroll_to_anchor_top($(window.location.hash));
@@ -140,7 +139,6 @@ jQuery(function($) {
 
     // scroll to the top of the anchor with an offset on desktops
     function smooth_scroll_to_anchor_top(anchor){
-        console.log('smooth scroll again again');
         if($(anchor) != 'undefined' ) {
         var window_media_query_980 = window.matchMedia("(max-width: 980px)")
         if(window_media_query_980.matches) {
@@ -152,10 +150,7 @@ jQuery(function($) {
             var admin_bar_height = parseInt($('#wpadminbar').outerHeight(true)) || 0;
             var owner_portal_sticky_bar_height = parseInt($('#owners-portal-menu.et_pb_sticky').outerHeight(true)) || 0;
 
-            console.log($('#owners-portal-menu.et_pb_sticky'));
-            console.log(owner_portal_sticky_bar_height);
             var offset_amount = top_header_height + main_header_height + admin_bar_height + owner_portal_sticky_bar_height;
-            console.log(offset_amount);
         }
 
         $('html,body').animate({scrollTop:($(anchor).offset().top - offset_amount) + 'px'}, 1000);

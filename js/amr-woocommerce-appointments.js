@@ -5,6 +5,7 @@ jQuery(function($) {
         setupFormEvents();
         setupEventCalendarButtons();
         setupFlyFishingOptions();
+        setupHorsebackRidingOptions();
     }); // end document ready
 
     /**
@@ -77,6 +78,19 @@ jQuery(function($) {
             var stringDate = data;
             var date = stringDate.split("-"); 
             selectedDate = new Date(date[0],date[1]-1,date[2]);//Date object
+
+            // reset quantity to 1 when changing date
+            // fix for number of people when date is partially
+            // scheduled 
+            var quantity = currentForm.find('.input-text.qty');
+            quantity.val('1').trigger("change");
+
+            // and pause and set it again just in case
+            setTimeout(function() {
+                quantity.val('1').trigger("change");
+            },750);
+            quantity.val('1').trigger("change");
+
             if(picker.data('duration_unit') == 'day') {
                 // Get the reservation type
                 var checkin_checkout_div = currentForm.find('.wc-appt-checkin-checkout-dates');
@@ -239,7 +253,7 @@ jQuery(function($) {
     }
 
     /**
-     * Do things when options are selected
+     * Do things when options are selected for fly fishing
      */
     function setupFlyFishingOptions() {
         var fly_fishing_owner_licensed_guide = $('.wc-pao-addon-212111-type-6-1');
@@ -260,6 +274,65 @@ jQuery(function($) {
 
             });
         }
+    }
+    /**
+     * Do things when options are selected for horseback riding
+    */
+    function setupHorsebackRidingOptions() {
+
+        var horeseback_riding_form = $('.wc-appointment-product-id[value="212112"]').parent();
+
+        // add the error box
+        $(horeseback_riding_form).append('<div id="horseback-riding-error"></div>');
+
+        var horseback_riding_number_in_party = $('#addon-212112-number-in-party-3');
+        
+        if(horseback_riding_number_in_party.length) {
+            $('.wc-appointments-appointment-hook.wc-appointments-appointment-hook-after').on('change', $(horseback_riding_number_in_party), function(event) {
+                
+                var quantity_selector = $(horseback_riding_number_in_party).val();
+                var quantity_selector_array = quantity_selector.split('-');
+                var quantity_selected = quantity_selector_array[1];
+
+                var current_product_quantity = ($(horseback_riding_number_in_party).parentsUntil('.wc-appointments-appointment-form-wrap.cart').parent().find('.input-text.qty'));
+                $(current_product_quantity).val(quantity_selected).trigger("change");
+
+            });
+
+        }
+        // set up a mutation observer to handle issues with the number of riders
+        var timeout_var;
+
+        var observer = new MutationObserver(function( mutations ) {
+            mutations.forEach(function( mutation ) {	
+                if(mutation.type == 'attributes') {
+                    if($(targetNode).prop('disabled')) {
+                        clearTimeout(timeout_var);
+                        timeout_var = setTimeout(function() {
+                            $('#horseback-riding-error').addClass('error');
+                            $('#horseback-riding-error').html('<p>Please try adding fewer riders or choose a different date.</p>');
+                        }, 4000);
+
+                    } else {
+                        clearTimeout(timeout_var);
+                        timeout_var = setTimeout(function() {
+                            $('#horseback-riding-error').removeClass('error');
+                            $('#horseback-riding-error').html('');
+
+                        }, 1000);
+                    }
+                }
+            });    
+        });
+        // Configuration of the observer:
+        var config = { 
+            childList: true,
+            attributes: true,
+            subtree: true,
+            characterData: true
+        }; 
+        var targetNode = $('.wc-appointment-product-id[value="212112"]').parent().find('.wc-appointments-appointment-form-button.single_add_to_cart_button')[0];
+        observer.observe(targetNode, config);  
     }
 
 });

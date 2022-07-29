@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.4.7 - 2022-07-28
+* Added options to support the horseback riders number in party.
+
 #### v1.4.6 - 2022-06-09
 * Updates to support Fly Fishing options.
 

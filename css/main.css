@@ -917,6 +917,10 @@ div.wpcf7-response-output {
 .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-pao-addon p.form-row:last-of-type {
     margin-bottom: 0;
 }
+.wc-pao-addon-field.wc-pao-addon-custom-textarea {
+    width: 100% !important;
+    min-height: 100px !important;
+}
 /* FLY FISHING */
 div[data-product-name="Fly Fishing"].wc-pao-addon-container.wc-pao-addon.wc-pao-addon-guest-name {
     flex-basis: 100% !important;
@@ -927,7 +931,25 @@ div[data-product-name="Fly Fishing"].wc-pao-addon-container.wc-pao-addon.wc-pao-
 .wc-pao-addon-licensed-guide-company-name.show_fields, .wc-pao-addon-licensed-guide-contact-number.show_fields {
     display: block;
 }
-
+/* HORSE RIDING */
+.wc-pao-addon-height-and-weight-for-each-rider {
+    flex-basis: 100% !important;
+}
+.wc-appointment-product-id[value="212112"] + div.quantity {
+    display: none !important;
+}
+#horseback-riding-error.error {
+    background-color: #ffecec;
+    margin: 30px 0 0;
+    border: 3px solid #ac0000;
+    padding: 5px 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+#horseback-riding-error.error p {
+    padding-bottom: 0;
+}
 /* Simple Google Calendar */
 
 /* Owners Portal Page */

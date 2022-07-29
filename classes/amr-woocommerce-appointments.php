@@ -40,12 +40,12 @@ class AMR_WooCommerceAppointments {
         // add_filter( 'wc_appointments_get_summary_list', array($this, 'modify_wc_appointments_get_summary_list'), 10, 1 );
         add_filter( 'woocommerce_order_item_get_formatted_meta_data', array($this, 'change_order_display_meta'), 10, 1 );
 
-        // add_filter( 'woocommerce_appointments_time_slots_html', array($this, 'change_woocommerce_appointments_time_slots_html'), 10, 10 );
         add_filter( 'get_product_addons_fields', array($this, 'change_addon_field_labels'), 10, 2 );
+
     }
 
-    // public function change_woocommerce_appointments_time_slots_html($slots_html, $slots, $intervals, $time_to_check, $staff_id, $from, $to, $timezone, $thisme, $appointments) {
-    // }
+
+
     /**
      * Add WooCommerce template location
      */
@@ -113,6 +113,11 @@ class AMR_WooCommerceAppointments {
                 if($product_id == 212111) {
                     $html .= '<div class="wc-appt-checkin-checkout-dates ' . $type . '">';
                     $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">Date: </span> <span class="checkin-value"></span></div>';
+                    // $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">' . $end_label . ' </span> <span class="checkout-value"></span></div>';
+                    $html .= '</div>';
+                } else if($product_id == 212112) {
+                    $html .= '<div class="wc-appt-checkin-checkout-dates ' . $type . '">';
+                    $html .= '<div class="wc-appt-checkin-date"><span class="amr-wc-appt-label checkin-label">Date: </span> <span class="checkin-value"></span><span> @ 10:00 AM</span></div>';
                     // $html .= '<div class="wc-appt-checkout-date"><span class="amr-wc-appt-label checkout-label">' . $end_label . ' </span> <span class="checkout-value"></span></div>';
                     $html .= '</div>';
                 } else {
