@@ -310,7 +310,7 @@ jQuery(function($) {
                         clearTimeout(timeout_var);
                         timeout_var = setTimeout(function() {
                             $('#horseback-riding-error').addClass('error');
-                            $('#horseback-riding-error').html('<p>Please try adding fewer riders or choose a different date.</p>');
+                            $('#horseback-riding-error').html('<p>Slots are filling up!</p><p>Please try adding fewer riders or choose a different date.</p>');
                         }, 4000);
 
                     } else {
