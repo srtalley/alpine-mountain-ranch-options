@@ -334,13 +334,10 @@ class AMR_WooCommerceAppointments {
         $cart = WC()->cart->cart_contents;
         foreach( $cart as $cart_item_id => $cart_item ) {
             if(isset($cart_item['appointment'])) {
-wl($cart_item['appointment']);
-wl('chonk');
                 // get the product
                 $product_id = $cart_item['product_id'];
                 $product = wc_get_product($product_id);
                 $duration_unit = $product->get_duration_unit();
-                wl($duration_unit);
                 if($duration_unit == 'day') {
                     // calculate checkout date
                     $checkin_date = \DateTime::createFromFormat('Y-m-d', $cart_item['appointment']['_date']);
@@ -354,7 +351,6 @@ wl('chonk');
                     $start_datetime = \DateTime::createFromFormat('Y-m-d G:i', $cart_item['appointment']['_date'] . ' ' . $cart_item['appointment']['_time']);
                     $cart_item['amr_appt_date'] = $start_datetime->format('F d, Y');
                     $cart_item['amr_starttime'] = $start_datetime->format('g:i A');
-// wl($cart_item['appointment']['_duration']);
                     $end_datetime = $start_datetime;
                     $end_datetime = $end_datetime->modify('+' . $cart_item['appointment']['_duration'] . ' minute');
                     $cart_item['amr_endtime'] = $end_datetime->format('g:i A');
