@@ -186,6 +186,9 @@ span.menu-closed.menu-open:before {
     background-color: #b56231;
     border-color: #b56231;
 }
+ul li.current-menu-item a {
+    color: #b56231;
+}
 .owners-portal-menu .menu-item a {
     /* padding-bottom: 0 !important; */
 }
@@ -222,11 +225,10 @@ span.menu-closed.menu-open:before {
     font-weight: 600;
     width: 250px;
 }
-.owners-portal-menu.et_pb_menu ul.sub-menu li.current-menu-item a {
+#owners-portal-menu.owners-portal-menu.et_pb_menu ul.sub-menu li.current-menu-item a {
     color: #000 !important;
-
 }
-.owners-portal-menu.et_pb_menu ul.sub-menu li.current-menu-item a:hover {
+#owners-portal-menu.owners-portal-menu.et_pb_menu ul.sub-menu li.current-menu-item a:hover {
     color: #fff !important;
 }
 .owners-portal-menu .et-menu .sub-menu li a:hover {
@@ -921,6 +923,18 @@ div.wpcf7-response-output {
     width: 100% !important;
     min-height: 100px !important;
 }
+/* BARN */
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after .amr-start-addon-fields .wc-pao-addon.wc-pao-addon-time-in,
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after .amr-start-addon-fields .wc-pao-addon.wc-pao-addon-time-out {
+    /* flex: 1 1 15% !important; */
+}
+
+/* OWNERS LODGE */
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after .amr-start-addon-fields .wc-pao-addon.wc-pao-addon-time-in,
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .wc-appointments-appointment-hook.wc-appointments-appointment-hook-after .amr-start-addon-fields .wc-pao-addon.wc-pao-addon-time-out {
+    /* flex: 1 1 15% !important; */
+}
+
 /* FLY FISHING */
 div[data-product-name="Fly Fishing"].wc-pao-addon-container.wc-pao-addon.wc-pao-addon-guest-name {
     flex-basis: 100% !important;

@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.4.8 - 2022-08-09
+* Updated the code to allow the correct processing of additional hours when adding a reservation that is hourly.
+
 #### v1.4.7 - 2022-07-28
 * Added options to support the horseback riders number in party.
 

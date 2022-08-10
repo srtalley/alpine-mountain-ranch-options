@@ -160,57 +160,74 @@ jQuery(function($) {
             }
           
         } );
-        form.on( 'time-selected', function(event, data) {
+        form.on( 'time-selected', function(event) {
             var currentForm = $(this);
-            var picker = currentForm.find( '.slot-picker' );
+            var picker = currentForm.find('.picker');
 
-            setTimeout(function() {
-                // Get selected slot 'data-slot' value.
-                var time_value = picker.find( '.selected' ).data( 'slot' ).toString();
-                var hour = time_value.substring(0,2);
-                var minute = time_value.substring(2,2);
+            if(picker.data('duration_unit') == 'hour') {
 
-                // use the date that was defined earlier
-                var start_date_with_hours = new Date(selectedDate);
-                start_date_with_hours.setHours(hour, minute);
+                var appointment_duration_default = picker.data( 'appointment_duration' );
+                if(appointment_duration_default == '' || appointment_duration_default < 0) {
+                    appointment_duration_default = 1;
+                }
 
-                var start_date_with_hours_locale = start_date_with_hours.toLocaleString('en-US', {
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true
-                });
+                setTimeout(function() {
+                    var time_value = currentForm.find('input[name="wc_appointments_field_start_date_time"]').val().toString();
+                    var time_value_array = time_value.split(":");
+                    var hour = time_value_array[0];
+                    var minute = time_value_array[1];
 
-                // set the appointment length to get the end time
-                var appointment_length = 3;
-                var end_time = (parseInt(hour) + appointment_length).toString();
+                    // get the addon time
+                    var addon_duration = currentForm.find('input[name="wc_appointments_field_addons_duration"]').val().toString();
 
-                var end_date_with_hours = start_date_with_hours;
-                end_date_with_hours.setHours(end_time);
-                var end_date_with_hours_locale = end_date_with_hours.toLocaleString('en-US', {
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true
-                });
+                    if(picker.data('duration_unit') == 'hour') {
+                        // round down - no decimals
+                        var addon_duration_hour = Math.floor(addon_duration / 60);
 
-                // $(currentForm).find('.starttime-value').html((start_date_with_hours.getMonth() + 1) + '/' + start_date_with_hours.getDate().toString() + '/' + start_date_with_hours.getFullYear().toString() + '-' + start_date_with_hours_locale);
+                        // find the minutes 
+                        var addon_duration_hours_to_minutes = addon_duration_hour * 60;
+                        var addon_duration_minutes = addon_duration - addon_duration_hours_to_minutes;
 
-                // $(currentForm).find('.endtime-value').html((end_date_with_hours.getMonth() + 1) + '/' + end_date_with_hours.getDate().toString() + '/' + end_date_with_hours.getFullYear().toString()  + '-' +  end_date_with_hours_locale);
+                    }
 
-                $(currentForm).find('.date-value').html((start_date_with_hours.getMonth() + 1) + '/' + start_date_with_hours.getDate().toString() + '/' + start_date_with_hours.getFullYear().toString());
+                    // use the date that was defined earlier
+                    var start_date_with_hours = new Date(selectedDate);
+                    start_date_with_hours.setHours(hour, minute);
 
+                    var start_date_with_hours_locale = start_date_with_hours.toLocaleString('en-US', {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: true
+                    });
 
-                $(currentForm).find('.starttime-value').html(start_date_with_hours_locale);
+                    // set the appointment length to get the end time
+                    var end_time_hour = (parseInt(hour) + parseInt(addon_duration_hour) + appointment_duration_default).toString();
+                    var end_time_minute = addon_duration_minutes;
+                    var end_date_with_hours = start_date_with_hours;
+                    end_date_with_hours.setHours(end_time_hour, end_time_minute);
+                    var end_date_with_hours_locale = end_date_with_hours.toLocaleString('en-US', {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: true
+                    });
 
-                $(currentForm).find('.endtime-value').html(end_date_with_hours_locale);
+                    // $(currentForm).find('.starttime-value').html((start_date_with_hours.getMonth() + 1) + '/' + start_date_with_hours.getDate().toString() + '/' + start_date_with_hours.getFullYear().toString() + '-' + start_date_with_hours_locale);
 
+                    // $(currentForm).find('.endtime-value').html((end_date_with_hours.getMonth() + 1) + '/' + end_date_with_hours.getDate().toString() + '/' + end_date_with_hours.getFullYear().toString()  + '-' +  end_date_with_hours_locale);
 
-            }, 700);
+                    $(currentForm).find('.date-value').html((start_date_with_hours.getMonth() + 1) + '/' + start_date_with_hours.getDate().toString() + '/' + start_date_with_hours.getFullYear().toString());
+
+                    $(currentForm).find('.starttime-value').html(start_date_with_hours_locale);
+
+                    $(currentForm).find('.endtime-value').html(end_date_with_hours_locale);
+
+                }, 700);
 
             // var picker = currentForm.find('.picker');
             // if(picker.data('duration_unit') == 'hour') {
             //     $(currentForm).find('.starttime-value').html('pizza');
 
-            // } // end hour
+            } // end hour
         });
         // form.on( 'click', '.appointable', function() {
         //     var currentForm = $(this);
@@ -281,6 +298,9 @@ jQuery(function($) {
     function setupHorsebackRidingOptions() {
 
         var horeseback_riding_form = $('.wc-appointment-product-id[value="212112"]').parent();
+        if(!horeseback_riding_form.length) {
+            return;
+        } 
 
         // add the error box
         $(horeseback_riding_form).append('<div id="horseback-riding-error"></div>');

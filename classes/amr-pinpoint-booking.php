@@ -13,11 +13,10 @@ class AMR_PinpointBooking {
         foreach($text_array as $key => $text) {
             // wl($key);
             if($text['key'] == 'EXTRAS_TITLE' || $text['key'] == 'EXTRAS_FRONT_END_TITLE' || $text['key'] == 'PARENT_EXTRAS') {
-                wl('never');
                 $text_array[$key]['text'] = 'Make Selection';
             }
         }
-        wl($text_array);
+        // wl($text_array);
         return $text_array;
     }
     /**
