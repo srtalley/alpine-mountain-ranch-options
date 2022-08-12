@@ -41,9 +41,27 @@ class AMR_WooCommerceAppointments {
         add_filter( 'woocommerce_order_item_get_formatted_meta_data', array($this, 'change_order_display_meta'), 10, 1 );
 
         add_filter( 'get_product_addons_fields', array($this, 'change_addon_field_labels'), 10, 2 );
+        // add_filter( 'woocommerce_appointments_time_slot_html', array($this, 'custom_time_slot_html'), 10, 9 );
 
     }
+// // Add end time after start time for time slots.
+// function custom_time_slot_html( $slot_html, $display_slot, $quantity, $time_to_check, $staff_id, $timezone, $appointable_product, $spaces_left, $appointments ) {
+//     // Selected.
+//     $selected = date( 'G:i', $display_slot ) == date( 'G:i', $time_to_check ) ? ' selected' : '';
 
+//     // Get end time.
+//     $end_time = strtotime( '+ ' . $appointable_product->get_duration() . ' ' . $appointable_product->get_duration_unit(), $display_slot );
+
+//     // Slot HTML.
+//     if ( $quantity['scheduled'] ) {
+//         /* translators: 1: quantity available */
+//         $slot_html = "<li class=\"slot$selected\" data-slot=\"" . esc_attr( date( 'Hi', $display_slot ) ) . "\"><a href=\"#\" data-value=\"" . date_i18n( 'G:i', $display_slot ) . "\">" . date_i18n( wc_time_format(), $display_slot ) . " &mdash; " . date_i18n( wc_time_format(), $end_time ) . " <small class=\"spaces-left\">" . $spaces_left . "</small></a></li>";
+//     } else {
+//         $slot_html = "<li class=\"slot$selected\" data-slot=\"" . esc_attr( date( 'Hi', $display_slot ) ) . "\"><a href=\"#\" data-value=\"" . date_i18n( 'G:i', $display_slot ) . "\">" . date_i18n( wc_time_format(), $display_slot ) . " &mdash; " . date_i18n( wc_time_format(), $end_time ) . "</a></li>";
+//     }
+    
+//     return $slot_html;
+// }
     /**
      * Add WooCommerce template location
      */
@@ -131,6 +149,7 @@ class AMR_WooCommerceAppointments {
 
                 $html .= '<div class="wc-appt-starttime"><span class="amr-wc-appt-label checkin-label">Starts: </span> <span class="starttime-value"></span></div>';
                 $html .= '<div class="wc-appt-endtime"><span class="amr-wc-appt-label endtime-label">Ends: </span> <span class="endtime-value"></span></div>';
+                $html .= '<div class="hourly-appointment-error"></div>';
                 $html .= '</div>';
             }
             if($duration_unit == 'day' || $duration_unit == 'hour') {

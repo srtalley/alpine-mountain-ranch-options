@@ -163,6 +163,7 @@ jQuery(function($) {
         form.on( 'time-selected', function(event) {
             var currentForm = $(this);
             var picker = currentForm.find('.picker');
+            var slotpicker = currentForm.find('.slot-picker');
 
             if(picker.data('duration_unit') == 'hour') {
 
@@ -203,6 +204,49 @@ jQuery(function($) {
                     // set the appointment length to get the end time
                     var end_time_hour = (parseInt(hour) + parseInt(addon_duration_hour) + appointment_duration_default).toString();
                     var end_time_minute = addon_duration_minutes;
+                    
+                    // var end_time_hour_padded = (end_time_hour).toString().padStart(2, "0");
+                    // var end_time_minute_padded = (end_time_minute).toString().padEnd(2, "0");
+                    // var slotpicker_end = slotpicker.find('li.slot[data-slot="' + end_time_hour_padded + end_time_minute_padded + '"]');
+
+                    // set up a mutation observer to watch to see if this is valid
+                    var timeout_var;
+
+                    var observer = new MutationObserver(function( mutations ) {
+                        mutations.forEach(function( mutation ) {	
+                            if(mutation.type == 'attributes') {
+                                if($(targetNode).prop('disabled')) {
+                                    clearTimeout(timeout_var);
+                                    timeout_var = setTimeout(function() {
+                                        currentForm.find('.wc-appt-starttime-endtime').addClass('error');
+                                        currentForm.find('.hourly-appointment-error').html('<p>Please try choosing a shorter duration or different start time to avoid overlapping other appointments or scheduling off hours.</p>');
+
+                                    }, 4000);
+
+                                } else {
+                                    clearTimeout(timeout_var);
+                                    timeout_var = setTimeout(function() {
+                                        currentForm.find('.wc-appt-starttime-endtime').removeClass('error');
+                                        currentForm.find('.hourly-appointment-error').html('');
+                                    }, 1000);
+                                }
+                            }
+                        });    
+                    });
+                    // Configuration of the observer:
+                    var config = { 
+                        childList: true,
+                        attributes: true,
+                        subtree: true,
+                        characterData: true
+                    }; 
+                    var targetNode = currentForm.find('.wc-appointment-product-id').parent().find('.wc-appointments-appointment-form-button.single_add_to_cart_button')[0];
+                    observer.observe(targetNode, config);  
+
+
+
+                    // go ahead and show the time ending
+
                     var end_date_with_hours = start_date_with_hours;
                     end_date_with_hours.setHours(end_time_hour, end_time_minute);
                     var end_date_with_hours_locale = end_date_with_hours.toLocaleString('en-US', {
@@ -210,6 +254,9 @@ jQuery(function($) {
                         minute: 'numeric',
                         hour12: true
                     });
+
+
+
 
                     // $(currentForm).find('.starttime-value').html((start_date_with_hours.getMonth() + 1) + '/' + start_date_with_hours.getDate().toString() + '/' + start_date_with_hours.getFullYear().toString() + '-' + start_date_with_hours_locale);
 

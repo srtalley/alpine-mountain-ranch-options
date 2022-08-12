@@ -810,7 +810,9 @@ div.wpcf7-response-output {
 .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot a {
     font-size: 18px;
 }
-.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot.selected a, .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot.selected:hover a {
+.wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot.selected a,
+ .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot.selected:hover a,
+ .wc-appointments-appointment-form-wrap .wc-appointments-appointment-form .slot-picker li.slot.slot_duration_end a {
     background-color: #3e7a03;
 }
 /* Remove the evening column */
@@ -825,9 +827,20 @@ div.wpcf7-response-output {
     flex-wrap: wrap;
     justify-content: space-between;
     font-size: 22px;
-    background-color: #161616;
+    background-color: #f1f1f1;
     padding: 10px 20px;
     margin-bottom: 20px;
+    transition: all 0.4s ease-in-out;
+    border: 2px solid #161616;
+}
+.wc-appt-starttime-endtime.error {
+    border-color: #b80000;
+    background-color: #fcdede;
+    color: #000 !important;
+}
+.wc-appt-starttime-endtime.error .wc-appt-starttime,
+.wc-appt-starttime-endtime.error .wc-appt-endtime {
+    opacity: 0;
 }
 /* .wc-appt-checkin-checkout-dates, .wc-appt-starttime-endtime */
 .wc-appt-checkin-checkout-dates.type-guest-cabin {
@@ -835,7 +848,7 @@ div.wpcf7-response-output {
 }
 .wc-appt-checkin-checkout-dates *,
 .wc-appt-starttime-endtime * {
-    color: #fff !important;
+    /* color: #fff !important; */
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif !important;
 }
 .wc-appt-checkin-checkout-dates > div,

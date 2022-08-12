@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.4.9 - 2022-08-11
+* Added warning about the time not being available.
+
 #### v1.4.8 - 2022-08-09
 * Updated the code to allow the correct processing of additional hours when adding a reservation that is hourly.
 
