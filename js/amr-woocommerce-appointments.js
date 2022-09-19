@@ -377,7 +377,7 @@ jQuery(function($) {
                         clearTimeout(timeout_var);
                         timeout_var = setTimeout(function() {
                             $('#horseback-riding-error').addClass('error');
-                            $('#horseback-riding-error').html('<p>Slots are filling up!</p><p>Please try adding fewer riders or choose a different date.</p>');
+                            $('#horseback-riding-error').html('<p>Unable to reserve this many riders.</p><p>Please try adding fewer riders, choose a different date, or call the property manager for availability.</p>');
                         }, 4000);
 
                     } else {
