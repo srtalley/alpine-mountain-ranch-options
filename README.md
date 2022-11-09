@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.5.1 - 2022-11-08
+* Updates to the calendar appearance.
+
 #### v1.4.9 - 2022-08-11
 * Added warning about the time not being available.
 
