@@ -650,7 +650,7 @@ div.wpcf7-response-output {
 }
 .wc-appointments-date-picker td.fully_scheduled.ui-state-disabled .ui-state-default,
 .wc-appointments-date-picker td:not(.past_day).not_appointable .ui-state-default{
-    background-color: #610300;
+    background-color: #761806;
     opacity: 1;
     border: 5px solid rgba(0, 0, 0, 0);
     color: #fff;
@@ -703,7 +703,7 @@ div.wpcf7-response-output {
 .wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day {
     /* background-color:rgba(0,0,0, 0.80) */
 }
-.wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.appointable .ui-state-default,
+.wc-appointments-date-picker .picker[data-duration_unit="day"] .ui-datepicker td.ui-datepicker-selected-day.appointable .ui-state-default,
 .wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default,
 .wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.appointable .ui-state-default:hover {
     background-color: #fff !important;
@@ -736,17 +736,19 @@ div.wpcf7-response-output {
 .wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.not_appointable .ui-state-default:after,
 .wc-appointments-date-picker .ui-datepicker td.ui-datepicker-current-day.not_appointable .ui-state-default:after,
 .wc-appointments-date-picker .ui-datepicker td.ui-datepicker-selected-day.not_appointable .ui-state-default:hover:after {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='times-circle' class='svg-inline--fa fa-times-circle fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23610300' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm101.8-262.2L295.6 256l62.2 62.2c4.7 4.7 4.7 12.3 0 17l-22.6 22.6c-4.7 4.7-12.3 4.7-17 0L256 295.6l-62.2 62.2c-4.7 4.7-12.3 4.7-17 0l-22.6-22.6c-4.7-4.7-4.7-12.3 0-17l62.2-62.2-62.2-62.2c-4.7-4.7-4.7-12.3 0-17l22.6-22.6c4.7-4.7 12.3-4.7 17 0l62.2 62.2 62.2-62.2c4.7-4.7 12.3-4.7 17 0l22.6 22.6c4.7 4.7 4.7 12.3 0 17z'%3E%3C/path%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='times-circle' class='svg-inline--fa fa-times-circle fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23761806' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm101.8-262.2L295.6 256l62.2 62.2c4.7 4.7 4.7 12.3 0 17l-22.6 22.6c-4.7 4.7-12.3 4.7-17 0L256 295.6l-62.2 62.2c-4.7 4.7-12.3 4.7-17 0l-22.6-22.6c-4.7-4.7-4.7-12.3 0-17l62.2-62.2-62.2-62.2c-4.7-4.7-4.7-12.3 0-17l22.6-22.6c4.7-4.7 12.3-4.7 17 0l62.2 62.2 62.2-62.2c4.7-4.7 12.3-4.7 17 0l22.6 22.6c4.7 4.7 4.7 12.3 0 17z'%3E%3C/path%3E%3C/svg%3E");
 
 }
-.wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default {
+.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default,
+.wc-appointments-date-picker .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default {
     background-color: #406b15 !important;
     color: #fff !important;
     font-weight: 800 !important;
     border: 5px solid rgba(0, 0, 0, 0);
     position: static;
 }
-.wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default:before {
+.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default:before,
+.wc-appointments-date-picker .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default:before {
     content: '4P Check In';
     position: absolute;
     bottom: 0;
@@ -764,7 +766,9 @@ div.wpcf7-response-output {
     font-size: 12px;
     line-height: 12px;
 }
-.wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:before {
+
+.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:before,
+.wc-appointments-date-picker .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:before {
     content: '10A Checkout';
     position: absolute;
     top: 0;
@@ -783,13 +787,16 @@ div.wpcf7-response-output {
     line-height: 12px;
 }
 
-.wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:after {
+.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:after,
+.wc-appointments-date-picker .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:after {
     display: none;
 }
-.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable {
+.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable,
+.wc-appointments-date-picker .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-checkout-day.appointable  {
     vertical-align: bottom;
 }
-.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:hover {
+.wc-appointments-date-picker .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:hover,
+.wc-appointments-date-picker .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:hover {
     position: static;
 
 }
@@ -1237,10 +1244,12 @@ div[data-product-name="Fly Fishing"].wc-pao-addon-container.wc-pao-addon.wc-pao-
     #owner-resources-list .document-headings .et_pb_blurb_container {
         padding-left: 0;
     }
-    .wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default:before {
+    .wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default:before,
+    .wc-appointments-date-picker  .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-current-day.appointable .ui-state-default:before {
         content: 'In';
     }
-    .wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:before {
+    .wc-appointments-date-picker  .picker[data-product_id="211976"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:before,
+    .wc-appointments-date-picker  .picker[data-product_id="216196"] .ui-datepicker td.ui-datepicker-checkout-day.appointable .ui-state-default:before {
         content: 'Out'
     }
 }

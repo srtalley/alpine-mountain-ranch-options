@@ -4,7 +4,7 @@ Plugin Name: Alpine Mountain Ranch Options
 Description: Modifications specific to AMR
 Author: Dusty Sun
 Author URI: https://dustysun.com
-Version: 1.5.1
+Version: 1.5.1d
 Text Domain: alpinemountainranch
 License: GPLv2
 */

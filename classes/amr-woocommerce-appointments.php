@@ -114,9 +114,9 @@ class AMR_WooCommerceAppointments {
             $product = wc_get_product($product_id);
             $duration_unit = $product->get_duration_unit();
             $html = '';
-            if($duration_unit == 'day') {
 
-                if($product_id == 211976) {
+            if($duration_unit == 'day') {
+                if($product_id == 211976 || $product_id == 216196) {
                     $start_label = 'Check In:';
                     $end_label = 'Check Out:';
                     $type = 'type-guest-cabin';
@@ -183,7 +183,7 @@ class AMR_WooCommerceAppointments {
             if( is_cart() ) :
         
                 // Here set the Url redirection
-                $url_redirection = site_url('/owners-portal/calendars');
+                $url_redirection = site_url('/owners-portal/facilities-calendar/');
                 
                 // When trying to access cart page if cart is already empty  
                 if( WC()->cart->is_empty() ){
@@ -482,7 +482,7 @@ class AMR_WooCommerceAppointments {
         $checkin_date = isset($cart_item['amr_checkin_date']) ? $cart_item['amr_checkin_date']: '';
         $checkout_date = isset($cart_item['amr_checkout_date']) ? $cart_item['amr_checkout_date']: '';
         if ( ! empty( $checkout_date ) ) {
-            if($cart_item['product_id'] == 211976) {
+            if($cart_item['product_id'] == 211976 || $cart_item['product_id'] == 216196) {
                 $item_data[] = array(
                     'name' => __('Check In', 'woocommerce'),
                     'value' => '4 PM, ' . $checkin_date,
@@ -496,7 +496,7 @@ class AMR_WooCommerceAppointments {
 
         }
         if ( ! empty( $checkout_date ) ) {
-            if($cart_item['product_id'] == 211976) {
+            if($cart_item['product_id'] == 211976 || $cart_item['product_id'] == 216196) {
                 // $date = date_create($checkout_date);
                 $tomorrow = date('F j, Y',strtotime($checkout_date . "+1 days"));
                 $item_data[] = array(

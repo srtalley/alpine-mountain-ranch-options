@@ -31,36 +31,70 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php
 	// When?
-	if ( isset( $date ) && $date ) {
-		printf(
-			'<li%1$s>%2$s: <strong>%3$s</strong></li>',
-			esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
-			esc_html__( 'When', 'woocommerce-appointments' ),
-			esc_attr( $date )
-		);
-	}
+	// if ( isset( $date ) && $date ) {
+	// 	printf(
+	// 		'<li%1$s>%2$s: <strong>%3$s</strong></li>',
+	// 		esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
+	// 		esc_html__( 'When', 'woocommerce-appointments' ),
+	// 		esc_attr( $date )
+	// 	);
+	// }
 	// Duration?
 	if ( isset( $duration ) && $duration ) {
-		printf(
-			'<li%1$s>%2$s: <strong>%3$s</strong></li>',
-			esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
-			esc_html__( 'Duration', 'woocommerce-appointments' ),
-			esc_attr( $duration )
-		);
+		// printf(
+		// 	'<li%1$s>%2$s: <strong>%3$s</strong></li>',
+		// 	esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
+		// 	esc_html__( 'Duration', 'woocommerce-appointments' ),
+		// 	esc_attr( $duration )
+		// );
 
 		$duration_split = explode(' ', $duration);
 		if(substr( $duration_split[1], 0, 3 ) === 'day') {
+
+			$product_id = $product->get_id();
+			$html = '';
+
 			$checkin_date = \DateTime::createFromFormat('F d, Y', $date);
-			$checkout_date = $checkin_date;
+			$checkin_date_value = $checkin_date->format('F d, Y');
+
 			// make sure not bool
-			if ($checkout_date instanceof \DateTime) {
-				$checkout_date = $checkout_date->modify('+' . ($duration_split[0]-1) . ' days');
-				printf(
-					'<li%1$s>%2$s: <strong>%3$s</strong></li>',
-					esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
-					esc_html__( 'End Date', 'woocommerce-appointments' ),
-					esc_attr( $checkout_date->format('F d, Y') )
-				);
+			if ($checkin_date instanceof \DateTime) {
+
+				// Fly fishing when set to a day
+                if($product_id == 212111) {
+                    $html .= '<li><strong>Date:</strong> ' . $checkin_date_value . '</li>';
+				// Horseback riding when set to a day
+                } else if($product_id == 212112) {
+					$html .= '<li><strong>Date:</strong> ' . $checkin_date_value . ' @ 10:00 AM</li>';
+                } else {
+
+					// Cabins
+					if($product_id == 211976 || $product_id == 216196) {
+						$checkin_date_value = '4 PM, ' . $checkin_date_value;
+						$checkout_date = $checkin_date->modify('+' . ($duration_split[0]) . ' days');
+						$checkout_date_value = '10 AM, ' . $checkout_date->format('F d, Y');
+						$start_label = 'Check In:';
+						$end_label = 'Check Out:';
+						$type = 'type-guest-cabin';
+					} else {
+						$checkout_date = $checkin_date->modify('+' . ($duration_split[0]-1) . ' days');
+						$checkout_date_value = $checkout_date->format('F d, Y');
+						$start_label = 'Start Date:';
+						$end_label = 'End Date:';
+						$type = 'type-other';
+					}
+
+                    $html .= '<li><strong>' . $start_label . ' </strong> ' . $checkin_date_value . '</li>';
+                    $html .= '<li><strong>' . $end_label . ' </strong> ' . $checkout_date_value . '</li>';
+                }
+
+				echo $html;
+				// printf(
+				// 	'<li%1$s>%2$s: <strong>%3$s</strong></li>',
+				// 	esc_html( isset( $is_rtl ) && 'right' === $is_rtl ? ' dir="rtl"' : '' ),
+				// 	esc_html__( 'End Date', 'woocommerce-appointments' ),
+				// 	esc_attr( $checkout_date->format('F d, Y') )
+				// );
 			}
 		}
 		if(substr( $duration_split[1], 0, 4 ) === 'hour') {
