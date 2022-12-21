@@ -10,11 +10,11 @@ class AMR_EventsManager {
         
         add_filter('em_email_users_hook', array($this, 'amr_add_email_header_footer'), 999999999990, 2);
 
-        add_filter('stonehenge_mailer_before_send', array($this, 'amr_add_email_header_footer'), 10, 2);
+        add_filter('em_mailer', array($this, 'amr_add_email_header_footer'), 10, 1);
+
 
     }
-
-
+    
     /**
      * Send additional fields to Mailchimp on signup
      * https://github.com/ibericode/mc4wp-snippets/blob/master/integrations/integration-slugs.md
@@ -143,43 +143,79 @@ class AMR_EventsManager {
     }
     
     /**
-     * Add the headers and footers to the emails
+     * Text for follow up email
      */
-    public function amr_add_email_header_footer($mail, $EM_Object) {
+    public function get_amr_follow_up_email_html() {
+        $html = '<p>Thank you for visiting Alpine Mountain Ranch & Club. We are committed to building a community that delivers authentic luxury in all that we do, and we appreciate you being apart of the experience.</p><p>Please review us on Google or Facebook to share your experience with others. Remember to follow us on Facebook and Instagram.</p><table width="100%"> <tr> <td> <table align="Left" border="0" cellpadding="0" cellspacing="0" width="284" class="flexibleContainer" style="border-collapse:collapse;"> <tr> <td> <p style="text-align:center;"> <a href="http://search.google.com/local/writereview?placeid=ChIJkZKDtGBqQocRSdc_28YFymc" target="_blank"><img src="https://alpinemountainranchsteamboat.com/wp-content/plugins/alpinemountainranch/images/review--google.png" style="max-width: 100%; height: auto" width="506" height="223"></a> </p></td></tr></table> <table align="Right" border="0" cellpadding="0" cellspacing="0" width="284" class="flexibleContainer" style="border-collapse:collapse;"> <tr> <td> <p style="text-align:center;"> <a href="https://www.facebook.com/AlpineMountainRanch/reviews/" target="_blank"><img src="https://alpinemountainranchsteamboat.com/wp-content/plugins/alpinemountainranch/images/review--facebook.png" style="max-width: 100%; height: auto" width="506" height="223"></a> </p></td></tr></table> </td></tr></table> <p>If you have questions about real estate opportunities at Alpine Mountain Ranch & Club, please reach out to us using the contact information below. <p>Thank you!<br/> Alpine Mountain Ranch & Club</p><a href="https://www.facebook.com/AlpineMountainRanch/" target="_blank"><img src="https://alpinemountainranchsteamboat.com/wp-content/plugins/alpinemountainranch/images/social--facebook.png" style="max-width: 100%; height: auto; margin-right: 10px;" width="32" height="32"></a> <a href="https://www.instagram.com/AlpineMountainRanch/" target="_blank"><img src="https://alpinemountainranchsteamboat.com/wp-content/plugins/alpinemountainranch/images/social--instagram.png" style="max-width: 100%; height: auto" width="32" height="32"></a>';
 
-        if( $mail->ContentType === 'text/plain' || !is_object($EM_Object) ) {
+            return $html;
+    }
+
+    /**
+     * Add the headers and footers to the emails and set the body for the follow up emails
+     */
+    public function amr_add_email_header_footer($mail) {
+
+        if( $mail->ContentType === 'text/plain' ) {
 			return $mail;
         }
-        // Fallback for EM Test Mail.
-		if( !in_array( get_class($EM_Object), array('EM_Booking', 'EM_Multiple_Booking') ) ) {
-			return $mail;
-        }
+
         if($mail == '' || $mail == null) {
             return $mail;
         } else {
 
-            // get the event category
-            $event_id = $EM_Object->event_id;
-            $em_event =  new \EM_Event( absint($event_id) );
-            $event_season = 'summer';
-            // Get the categories
-            $em_categories = $em_event->get_categories();
-            foreach($em_categories->terms as $em_category) {
-                $term_object = get_term($em_category->id, 'event-categories');
-                $parent_term = get_term($term_object->parent, 'event-categories');
+            // default season
+            $event_season = 'winter';
 
-                if($parent_term->slug == 'winter') {
-                    $event_season = 'winter';
-                    break;
-                }
-                if($parent_term->slug == 'summer') {
-                    $event_season = 'summer';
-                    break;
-                }
-            }
             if(substr($mail->Subject, 0, strlen('Thank you for attending')) === 'Thank you for attending') {
+                // We have to determine the season separately for follow up events
+                // get today's date
+                $today = new \DateTime();
+
+                // get the season dates
+                $summer = new \DateTime('May 1');
+                $winter = new \DateTime('November 1');
+
+                switch(true) {
+
+                    case $today >= $summer && $today < $winter:
+                        $event_season = 'winter';
+                        break;
+
+                    default:
+                        $event_season = 'winter';
+                        break;
+
+                }
+
                 $mail_header = $this->get_amr_header($event_season, 'followup');
+                $mail->Body = $this->get_amr_follow_up_email_html();
+
             } else {
+
+                global $EM_Booking;
+                if(is_object($EM_Booking)) {
+                    // get the event category
+                    $event_id = $EM_Booking->event_id;
+                    $em_event =  new \EM_Event( absint($event_id) );
+                    $event_season = 'summer';
+                    // Get the categories
+                    $em_categories = $em_event->get_categories();
+                    foreach($em_categories->terms as $em_category) {
+                        $term_object = get_term($em_category->id, 'event-categories');
+                        $parent_term = get_term($term_object->parent, 'event-categories');
+    
+                        if($parent_term->slug == 'winter') {
+                            $event_season = 'winter';
+                            break;
+                        }
+                        if($parent_term->slug == 'summer') {
+                            $event_season = 'summer';
+                            break;
+                        }
+                    }
+                }
+
                 $mail_header = $this->get_amr_header($event_season, 'regular');
             }
             $mail_footer= $this->get_amr_footer();
@@ -188,10 +224,10 @@ class AMR_EventsManager {
             $mail->Body = str_replace('<html><body>', '', $mail->Body);
             $mail->Body = str_replace( '</body></html><p style="clear:both;">&nbsp;</p>', '', $mail->Body);
 
-            $wpautop_body = html_entity_decode( wp_kses_allowed( wpautop( $mail->Body ) ) );
+            // $wpautop_body = html_entity_decode( \wp_kses_allowed( wpautop( $mail->Body ) ) );
+            $wpautop_body = html_entity_decode( wpautop( $mail->Body )  );
+
             $mail->Body = $mail_header . $wpautop_body . $mail_footer;
-            
-            return $mail;
         }
     }
    

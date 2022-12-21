@@ -4,7 +4,7 @@ Plugin Name: Alpine Mountain Ranch Options
 Description: Modifications specific to AMR
 Author: Dusty Sun
 Author URI: https://dustysun.com
-Version: 1.5.1d
+Version: 1.5.2
 Text Domain: alpinemountainranch
 License: GPLv2
 */
@@ -60,7 +60,6 @@ class AMR_Options {
 
     // get the settings
     $this->current_settings = $this->alpinemountainranch_settings_obj->get_current_settings();
-    // $this->wl($this->current_settings);
 
     // Get the plugin options
     $this->alpinemountainranch_main_settings = $this->alpinemountainranch_settings_obj->get_main_settings();

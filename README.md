@@ -1,6 +1,9 @@
 # Custom functions for Alpine Mountain Ranch.
 
 ### Changelog
+#### v1.5.2 - 2022-12-21
+* Updates to allow adding the header and footer back to the emails in the new version of Events Manager Pro.
+
 #### v1.5.1 - 2022-11-08
 * Updates to the calendar appearance.
 
